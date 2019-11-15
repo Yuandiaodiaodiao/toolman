@@ -1,12 +1,1 @@
-[
-  {
-    "url": "http://www.ruanyifeng.com/blog/atom.xml",
-    "qq_group_id": "967636480",
-    "qq_id_list": []
-  },
-  {
-    "url": "https://rsshub.app/sdu/cs/0",
-    "qq_group_id": "967636480",
-    "qq_id_list": []
-  }
-]
+{"967636480": {"http://www.ruanyifeng.com/blog/atom.xml": ["2523897396"]}, "967636481": {}}
