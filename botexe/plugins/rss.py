@@ -1,14 +1,39 @@
 from nonebot import on_command, CommandSession
 from nonebot.typing import Context_T
+from nonebot import NoneBot
 import nonebot
+from messages.handler import handler
+import nonebot.helpers
 
-bot=nonebot.get_bot()
+bot = nonebot.get_bot()
 
-@bot.on_message('private')
+
+@bot.on_message('group')
 async def handle_group_message(ctx: Context_T):
     print(ctx)
+    text = ""
+    if any(map(lambda x: x.type == 'at' and x.data['qq']==str(ctx['self_id']), ctx['message'])):
+        ctx['at'] = True
+    if not ctx.get('at'):
+        return
+    for i in ctx.get('message'):
+        if i.type == 'text':
+            text += i.data['text']
+    data = {
+        "qq_group_id": str(ctx.get('group_id')),
+        "qq_id": str(ctx.get('user_id')),
+        "text": text,
+        "img": ''
+    }
 
-    pass
+    ret = handler(data)
+    if str(ctx.get('group_id')) == '967636480':
+        await nonebot.helpers.send(bot=bot, ctx=ctx, message='handle return ' + str(ret))
+
+
+from nonebot.message import message_preprocessor
+
+
 
 # on_command 装饰器将函数声明为一个命令处理器
 # # 这里 weather 为命令的名字，同时允许使用别名「天气」「天气预报」「查天气」

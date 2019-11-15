@@ -1,12 +1,28 @@
-import nonebot
-import config
-from os import path
+import tornado.ioloop
+import tornado.web
+import json
+globalMessage=[]
+class MainHandler(tornado.web.RequestHandler):
+    def get(self):
+        self.write("Hello, world")
+
+    def pullMessage(self):
+        return globalMessage
+        pass
+    def post(self):
+        global globalMessage
+        js = json.loads(self.request.body)
+        print(js)
+        if js.get('formBot'):
+            res=self.pullMessage()
+            self.write(json.dumps(res))
+            globalMessage=[]
+        else:
+            globalMessage.append(js)
 
 if __name__ == "__main__":
-    nonebot.init(config)
-    # nonebot.load_builtin_plugins()
-    nonebot.load_plugins(
-        path.join(path.dirname(__file__), 'plugins'),
-        'plugins'
-    )
-    nonebot.run(host='127.0.0.1', port=8080)
+    application = tornado.web.Application([
+        (r"/", MainHandler),
+    ])
+    application.listen(50382)
+    tornado.ioloop.IOLoop.current().start()

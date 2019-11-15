@@ -13,7 +13,7 @@ RSSHUB_URL = "http://server.oops-sdu.cn:1200"
 
 def send_message(qq_group_id, qq_id_list, text, img):
     print(qq_group_id, qq_id_list, text, img)
-    
+
     pass
 
 
@@ -76,6 +76,16 @@ def handler_plain(data):
 
 
 def handler(data):
+    """
+
+    :param data:
+      "qq_group_id": "967636480",
+        "qq_id": "2523897396",
+        "text": "在炮弹里洗个澡吧",
+        "img": None
+    :return:
+    """
+
     json_list = json.load(open("../rss_fetch/rss_list.json"))
     if data['qq_group_id'] not in json_list.keys():
         return
