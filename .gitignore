@@ -2,6 +2,7 @@
 1442766687/
 image/
 
+.idea/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
