@@ -17,8 +17,13 @@ class MainHandler(tornado.web.RequestHandler):
             res=self.pullMessage()
             self.write(json.dumps(res))
             globalMessage=[]
+            return
         else:
             globalMessage.append(js)
+
+        self.write('')
+        return
+
 
 if __name__ == "__main__":
     application = tornado.web.Application([
