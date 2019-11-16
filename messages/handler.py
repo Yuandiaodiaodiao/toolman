@@ -20,6 +20,10 @@ def send_message(qq_group_id, qq_id_list, text, img):
         print("网络错误")
 
 
+def simple_send_message(data, text):
+    send_message(data['qq_group_id'], [], text, "")
+
+
 def add_rss_url(data, rss_url, at):
     json_list = json.load(open("../rss_fetch/rss_list.json"))
     json_item = json_list[data['qq_group_id']]
@@ -30,6 +34,7 @@ def add_rss_url(data, rss_url, at):
         send_message(data['qq_group_id'], [], f"此群添加了 {rss_url} 订阅源。", "")
     if at:
         json_item[rss_url].append(data['qq_id'])
+        json_item[rss_url] = list(set(json_item[rss_url]))
         send_message(data['qq_group_id'], [data['qq_id']], f"当 {rss_url} 更新时会提醒你。", "")
     json.dump(json_list, open("../rss_fetch/rss_list.json", "w"))
 
@@ -51,7 +56,7 @@ def del_rss_url(data, rss_url, at):
 def handler_command(data):
     message_help = """
 结合 https://docs.rsshub.app 使用效果更佳
-出于稳定考虑，本 bot 会使用 http://server.oops-sdu.cn:1200 进行替换
+出于稳定考虑，本 bot 在抓取 RSS 时会使用 http://server.oops-sdu.cn:1200 进行替换
 ---
 # : 帮助
 # add rss_url : 添加 RSS 订阅
@@ -73,13 +78,14 @@ def handler_command(data):
         send_message(data['qq_group_id'], [data['qq_id']], message_help, "")
 
 
+# 你应该修改这个
 def handler_plain(data):
-    pass
+    text = data['text'].strip()
+    
 
 
 def handler(data):
     """
-
     :param data:
       "qq_group_id": "967636480",
         "qq_id": "2523897396",
@@ -89,9 +95,9 @@ def handler(data):
     """
 
     json_list = json.load(open("../rss_fetch/rss_list.json"))
+    data['text'] = data['text'].strip()
     print('--------')
     print(data)
-    data['text'] = data['text'].strip()
     if data['qq_group_id'] not in json_list.keys():
         return
 
