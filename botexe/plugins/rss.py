@@ -4,7 +4,8 @@ from nonebot import NoneBot
 import nonebot
 from messages.handler import handler
 import nonebot.helpers
-
+import json
+import requests
 bot = nonebot.get_bot()
 
 
@@ -25,10 +26,10 @@ async def weather(session: CommandSession):
 async def handle_group_message(ctx: Context_T):
     print(ctx)
     text = ""
-    if any(map(lambda x: x.type == 'at' and x.data['qq']==str(ctx['self_id']), ctx['message'])):
-        ctx['at'] = True
-    if not ctx.get('at'):
-        return
+    # if any(map(lambda x: x.type == 'at' and x.data['qq']==str(ctx['self_id']), ctx['message'])):
+    #     ctx['at'] = True
+    # if not ctx.get('at'):
+    #     return
     for i in ctx.get('message'):
         if i.type == 'text':
             text += i.data['text']
@@ -38,10 +39,10 @@ async def handle_group_message(ctx: Context_T):
         "text": text,
         "img": ''
     }
-
-    ret = handler(data)
-    if str(ctx.get('group_id')) == '967636480':
-        pass
+    requests.post('http://192.168.137.205:50383',data=json.dumps(data))
+    # ret = handler(data)
+    # if str(ctx.get('group_id')) == '967636480':
+    #     pass
         # await nonebot.helpers.send(bot=bot, ctx=ctx, message='handle return ' + str(ret))
 
 
