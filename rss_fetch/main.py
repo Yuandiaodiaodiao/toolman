@@ -27,6 +27,7 @@ while True:
     for key_i in json_reader.keys():
         for key_j in json_reader[key_i].keys():
             send_package = {}
+            key_j.replace(RSSHUB_URL, OUT_RSSHUB_URL)
             rss_reader = feedparser.parse(key_j)
             # print(rss_reader.keys())
             # print(rss_reader['entries'])
@@ -40,6 +41,8 @@ while True:
                     break
                 text = ''
                 text = lis['title'] + '\n' + lis['link']
+                # if 'author' in lis:
+                #     text = text + '\n' + lis['author']
                 if is_pxj:
                     # print('this is summary ' + lis['summary'])
                     img_pos_l = re.search('img src="', lis['summary']).span()[1]
@@ -57,7 +60,6 @@ while True:
                 texts.append(text)
             if len(texts) != 0:
                 last_mess[key_j] = texts[0]
-            if len(texts) != 0:
                 send_package['qq_group_id'] = key_i
                 send_package['qq_id_list'] = json_reader[key_i][key_j]
                 send_package['text'] = texts
@@ -75,8 +77,8 @@ while True:
 # print(lis['title'])  # 标题
 # print(lis['link'])  # 链接
 # print(lis['published'])  # 发布时间
-#                print(lis['updated'])#更新时间
+# print(lis['updated'])#更新时间
 # print(lis['summary'])  # 简介
-#                print(lis['authors'])#作者们的资料
-#                print(lis['href'])#形似主页
+# print(lis['authors'])#作者们的资料
+# print(lis['href'])#形似主页
 # print(lis['author'])  # 作者？主作者之类的
