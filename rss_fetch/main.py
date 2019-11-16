@@ -5,8 +5,8 @@ import re
 import requests
 from urllib import request
 
-MESSES_NUMBER = 3
-IP_ADDRESS = 'http://127.0.0.1:50382'
+MESSES_NUMBER = 1
+IP_ADDRESS = 'http://192.168.137.1:50382'
 
 
 def check_url(url):
@@ -37,7 +37,7 @@ while 12 < 450:
                 if index >= MESSES_NUMBER:
                     break
                 text = ''
-                text = lis['title'] + '$' + lis['link'] + '$' + lis['author']
+                text = lis['title'] + '\n' + lis['link'] + '\n' + lis['author']
                 if is_pxj:
                     # print('this is summary ' + lis['summary'])
                     img_pos_l = re.search('img src="', lis['summary']).span()[1]
@@ -60,7 +60,7 @@ while 12 < 450:
             send_package['qq_id_list'] = json_reader[key_i][key_j]
             send_package['text'] = texts
             send_package['img'] = picture
-            # res = requests.post(IP_ADDRESS, data=json.dumps(send_package))
+            res = requests.post(IP_ADDRESS, data=json.dumps(send_package))
             print(send_package)
     time.sleep(1200)
 # print(lis['content'][0].keys())
