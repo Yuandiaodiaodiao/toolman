@@ -1,1 +1,10 @@
-{"967636480": {"http://www.ruanyifeng.com/blog/atom.xml": ["2523897396"], "https://rsshub.app/sdu/cs/0": [], "https://rsshub.app/gov/miit/zcjd": ["2523897396"], "https://rsshub.app/bilibili/user/video/12434430": ["2523897396"]}, "749652004": {}}
+{
+  "967636480": {
+    "http://www.ruanyifeng.com/blog/atom.xml": [
+      "2523897396"
+    ],
+    "https://rsshub.app/sdu/cs/0": [],
+    "https://rsshub.app/gov/miit/zcjd": []
+  },
+  "749652004": {}
+}
