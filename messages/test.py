@@ -1,15 +1,9 @@
 import json
+import os
 
-a = {
-    "967636480": {
-        "http://www.ruanyifeng.com/blog/atom.xml": [
-            "2523897396"
-        ],
-        "https://rsshub.app/sdu/cs/0": [
-            "2523897396"
-        ]
-    },
-    "967636481": {}
-}
-a.pop("967636480")
-print(a)
+a = os.listdir('images/have_name')
+bqb = {}
+for item in os.listdir('images/have_name'):
+    name = item.split('.')[0]
+    bqb[name] = 'images/have_name/' + item
+print(bqb)

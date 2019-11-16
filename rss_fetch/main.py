@@ -7,6 +7,8 @@ from urllib import request
 
 MESSES_NUMBER = 1
 IP_ADDRESS = 'http://192.168.137.1:50382'
+RSSHUB_URL = "https://rsshub.app"
+OUT_RSSHUB_URL = "http://server.oops-sdu.cn:1200"
 
 
 def check_url(url):
@@ -18,13 +20,14 @@ def check_url(url):
 
 
 last_mess = {}
-while 12 < 450:
-    fin = open('rss_list.json', encoding='utf-8')
-    content = fin.read()
+while True:
+    with open('rss_list.json', encoding='utf-8') as fin:
+        content = fin.read()
     json_reader = json.loads(content)
     for key_i in json_reader.keys():
         for key_j in json_reader[key_i].keys():
             send_package = {}
+            key_j.replace(RSSHUB_URL, OUT_RSSHUB_URL)
             rss_reader = feedparser.parse(key_j)
             # print(rss_reader.keys())
             # print(rss_reader['entries'])
@@ -37,7 +40,9 @@ while 12 < 450:
                 if index >= MESSES_NUMBER:
                     break
                 text = ''
-                text = lis['title'] + '\n' + lis['link'] + '\n' + lis['author']
+                text = lis['title'] + '\n' + lis['link']
+                # if 'author' in lis:
+                #     text = text + '\n' + lis['author']
                 if is_pxj:
                     # print('this is summary ' + lis['summary'])
                     img_pos_l = re.search('img src="', lis['summary']).span()[1]
@@ -55,14 +60,13 @@ while 12 < 450:
                 texts.append(text)
             if len(texts) != 0:
                 last_mess[key_j] = texts[0]
-
-            send_package['qq_group_id'] = key_i
-            send_package['qq_id_list'] = json_reader[key_i][key_j]
-            send_package['text'] = texts
-            send_package['img'] = picture
-            res = requests.post(IP_ADDRESS, data=json.dumps(send_package))
-            print(send_package)
-    time.sleep(1200)
+                send_package['qq_group_id'] = key_i
+                send_package['qq_id_list'] = json_reader[key_i][key_j]
+                send_package['text'] = texts
+                send_package['img'] = picture
+                res = requests.post(IP_ADDRESS, data=json.dumps(send_package))
+                print(send_package)
+    time.sleep(5)
 # print(lis['content'][0].keys())
 
 
@@ -73,8 +77,8 @@ while 12 < 450:
 # print(lis['title'])  # 标题
 # print(lis['link'])  # 链接
 # print(lis['published'])  # 发布时间
-#                print(lis['updated'])#更新时间
+# print(lis['updated'])#更新时间
 # print(lis['summary'])  # 简介
-#                print(lis['authors'])#作者们的资料
-#                print(lis['href'])#形似主页
+# print(lis['authors'])#作者们的资料
+# print(lis['href'])#形似主页
 # print(lis['author'])  # 作者？主作者之类的
