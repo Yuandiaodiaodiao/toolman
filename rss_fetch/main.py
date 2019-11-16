@@ -39,7 +39,7 @@ while 12 < 450:
                 if index >= MESSES_NUMBER:
                     break
                 text = ''
-                text = lis['title'] + '\n' + lis['link'] + '\n' + lis['author']
+                text = lis['title'] + '\n' + lis['link']
                 if is_pxj:
                     # print('this is summary ' + lis['summary'])
                     img_pos_l = re.search('img src="', lis['summary']).span()[1]
