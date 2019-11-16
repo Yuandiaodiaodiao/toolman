@@ -20,7 +20,7 @@ def check_url(url):
 
 
 last_mess = {}
-while 12 < 450:
+while True:
     with open('rss_list.json', encoding='utf-8') as fin:
         content = fin.read()
     json_reader = json.loads(content)
