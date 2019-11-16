@@ -7,6 +7,8 @@ from urllib import request
 
 MESSES_NUMBER = 1
 IP_ADDRESS = 'http://192.168.137.1:50382'
+RSSHUB_URL = "https://rsshub.app"
+OUT_RSSHUB_URL = "http://server.oops-sdu.cn:1200"
 
 
 def check_url(url):
@@ -19,8 +21,8 @@ def check_url(url):
 
 last_mess = {}
 while 12 < 450:
-    fin = open('rss_list.json', encoding='utf-8')
-    content = fin.read()
+    with open('rss_list.json', encoding='utf-8') as fin:
+        content = fin.read()
     json_reader = json.loads(content)
     for key_i in json_reader.keys():
         for key_j in json_reader[key_i].keys():
