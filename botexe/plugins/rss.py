@@ -8,6 +8,19 @@ import nonebot.helpers
 bot = nonebot.get_bot()
 
 
+@on_command('weather', aliases=('天气', '天气预报', '查天气'))
+async def weather(session: CommandSession):
+    # 从会话状态（session.state）中获取城市名称（city），如果当前不存在，则询问用户
+    city = session.get('city', prompt='你想查询哪个城市的天气呢？')
+    # 获取城市的天气预报
+    weather_report=' 1'
+    # 向用户发送天气预报
+    await session.send(weather_report)
+
+
+# weather.args_parser 装饰器将函数声明为 weather 命令的参数解析器
+# 命令解析器用于将用户输入的参数解析成命令真正需要的数据
+
 @bot.on_message('group')
 async def handle_group_message(ctx: Context_T):
     print(ctx)
