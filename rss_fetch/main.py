@@ -27,8 +27,7 @@ while True:
     for key_i in json_reader.keys():
         for key_j in json_reader[key_i].keys():
             send_package = {}
-            key_j.replace(RSSHUB_URL, OUT_RSSHUB_URL)
-            rss_reader = feedparser.parse(key_j)
+            rss_reader = feedparser.parse(key_j.replace(RSSHUB_URL, OUT_RSSHUB_URL))
             # print(rss_reader.keys())
             # print(rss_reader['entries'])
             texts = []
