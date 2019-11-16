@@ -81,7 +81,8 @@ def handler_command(data):
 # 你应该修改这个
 def handler_plain(data):
     text = data['text'].strip()
-    
+    if text == 'yzh':
+        simple_send_message(data, 'cy!!!')
 
 
 def handler(data):
