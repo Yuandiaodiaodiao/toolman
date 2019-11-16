@@ -11,8 +11,8 @@ class MainHandler(tornado.web.RequestHandler):
 
     def post(self):
         data = json.loads(self.request.body, encoding='utf-8')
-        handler.handler(data)
         self.write('ok')
+        handler.handler(data)
 
 
 if __name__ == "__main__":
