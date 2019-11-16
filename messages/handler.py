@@ -1,9 +1,23 @@
 import requests
 import json
+import os
+import base64
+import random
 
 RSSHUB_URL = "https://rsshub.app"
 OUR_RSSHUB_URL = "http://server.oops-sdu.cn:1200"
 POST_URL = "http://192.168.137.1:50382"
+
+# 表情包初始化
+bqb = {}
+
+
+def bqb_init():
+    global bqb
+    bqb = json.load(open('image_list.json', encoding='utf-8'))
+
+
+bqb_init()
 
 
 def send_message(qq_group_id, qq_id_list, text, img):
@@ -83,6 +97,9 @@ def handler_plain(data):
     text = data['text'].strip()
     if text == 'yzh':
         simple_send_message(data, 'cy!!!')
+        return
+    if text in bqb:
+        send_message(data['qq_group_id'], [], '', random.choice(bqb[text]))
 
 
 def handler(data):
@@ -102,7 +119,7 @@ def handler(data):
     if data['qq_group_id'] not in json_list.keys():
         return
 
-    if data["text"][0] == '#':
+    if len(data["text"]) > 0 and data["text"][0] == '#':
         handler_command(data)
     else:
         handler_plain(data)
