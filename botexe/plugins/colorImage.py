@@ -10,5 +10,7 @@ async def colorImage(session: CommandSession):
     msg=Message()
     url="http://image.baidu.com/search/index?tn=baiduimage&ps=1&ct=201326592&lm=-1&cl=2&nc=1&ie=utf-8&word=%E8%89%B2%E5%9B%BE"
     imgurl='https://s2.ax1x.com/2019/03/29/A00Whn.png'
-    msg.append(MessageSegment.share(url,"色图","网警已介入本群",imgurl))
+    # msg.append(MessageSegment.share(url,"色图","网警已介入本群",imgurl))
+    msg.append(MessageSegment.image('https://s2.ax1x.com/2019/11/16/MBYbmd.jpg'))
+    msg.extend('没有色图给👴爬')
     await session.send(msg)

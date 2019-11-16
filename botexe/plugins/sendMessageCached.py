@@ -27,19 +27,30 @@ async def _():
             # int(i.get('qq_group_id'))
             for j in i.get('qq_id_list'):
                 msg.append(MessageSegment.at(int(j)))
-            msg.extend('\n')
+            if len(i.get('qq_id_list')) > 0:
+                msg.extend('\n')
             textObj = i.get('text')
             if isinstance(textObj, list):
                 for j in textObj:
                     msg.extend(j.replace('$', ' '))
             else:
                 try:
-                    msg.extend(i.get('text'))
+                    msg.extend(textObj)
                 except:
                     print(f'i.get() error')
-            await bot.send_group_msg(group_id=967636480,
+            imageList=i.get('img')
+            if isinstance(imageList,list):
+                for j in imageList:
+                    if len(j)>0:
+                        msg.append(MessageSegment.image(j))
+            else:
+                try:
+                    if len(imageList)>0:
+                        msg.append(MessageSegment.image(imageList))
+                except:
+                    print(f'image send error')
+            await bot.send_group_msg(group_id=int(i.get('qq_group_id')),
                                      message=msg)
-            print('say')
         # await bot.send_group_msg(group_id=967636480,
         #                          message=f'给爬')
 
