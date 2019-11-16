@@ -14,8 +14,11 @@ async def _():
         data={
             'formBot':True
         }
-        res=requests.post('http://127.0.0.1:50382',data=json.dumps(data))
-        js=json.loads(res.text)
+        try:
+            res=requests.post('http://127.0.0.1:50382',data=json.dumps(data))
+            js=json.loads(res.text)
+        except:
+            return
         for i in js:
             print(i)
             msg=Message('')
@@ -26,7 +29,7 @@ async def _():
             textObj=i.get('text')
             if isinstance(textObj,list):
                 for j in textObj:
-                    msg.extend(i.get('text'))
+                    msg.extend(j.replace('$',' '))
             else:
                 msg.extend(i.get('text'))
             await bot.send_group_msg(group_id=967636480,

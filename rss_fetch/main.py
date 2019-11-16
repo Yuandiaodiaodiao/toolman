@@ -60,7 +60,7 @@ while 12 < 450:
             send_package['qq_id_list'] = json_reader[key_i][key_j]
             send_package['text'] = texts
             send_package['img'] = picture
-            # res = requests.post(IP_ADDRESS, data=json.dumps(send_package))
+            res = requests.post(IP_ADDRESS, data=json.dumps(send_package))
             print(send_package)
     time.sleep(1200)
 # print(lis['content'][0].keys())

@@ -41,7 +41,8 @@ async def handle_group_message(ctx: Context_T):
 
     ret = handler(data)
     if str(ctx.get('group_id')) == '967636480':
-        await nonebot.helpers.send(bot=bot, ctx=ctx, message='handle return ' + str(ret))
+        pass
+        # await nonebot.helpers.send(bot=bot, ctx=ctx, message='handle return ' + str(ret))
 
 
 from nonebot.message import message_preprocessor
