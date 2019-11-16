@@ -1,22 +1,23 @@
 import requests
 import json
 
-RSSHUB_URL = "http://server.oops-sdu.cn:1200"
-POST_URL = "192.168.137.1:50382"
+RSSHUB_URL = "https://rsshub.app"
+OUR_RSSHUB_URL = "http://server.oops-sdu.cn:1200"
+POST_URL = "http://192.168.137.1:50382"
 
 
 def send_message(qq_group_id, qq_id_list, text, img):
-    print(qq_group_id, qq_id_list, text, img)
+    data = json.dumps({
+        "qq_group_id": qq_group_id,
+        "qq_id_list": qq_id_list,
+        "text": text,
+        "img": img
+    })
+    print(data)
     try:
-        requests.post(POST_URL, data=json.dumps({
-            "qq_group_id": qq_group_id,
-            "qq_id_list": qq_id_list,
-            "text": text,
-            "img": img
-        }))
+        requests.post(POST_URL, data=data)
     except requests.exceptions.InvalidSchema:
         print("网络错误")
-
 
 
 def add_rss_url(data, rss_url, at):
@@ -67,7 +68,7 @@ def handler_command(data):
     elif len(text) > 1 and text[1] == 'del':
         del_rss_url(data, text[2], '-at' in text)
     elif len(text) > 1 and text[1] == 'status':
-        send_message(data['qq_group_id'], [data['qq_id']], json.load(open("../rss_fetch/rss_list.json")), "")
+        send_message(data['qq_group_id'], [data['qq_id']], json.dumps(json.load(open("../rss_fetch/rss_list.json")), indent=2), "")
     else:
         send_message(data['qq_group_id'], [data['qq_id']], message_help, "")
 
@@ -88,6 +89,9 @@ def handler(data):
     """
 
     json_list = json.load(open("../rss_fetch/rss_list.json"))
+    print('--------')
+    print(data)
+    data['text'] = data['text'].strip()
     if data['qq_group_id'] not in json_list.keys():
         return
 
