@@ -53,12 +53,12 @@ while True:
                     picture.append(lis['content'][0]['value'][img_pos_l:img_pos_r])
                 # elif is_sdu:
                     # print(lis)
-                if key_j in last_mess:
-                    if text == last_mess[key_j]:
+                if key_i+key_j in last_mess:
+                    if text == last_mess[key_i+key_j]:
                         break
                 texts.append(text)
             if len(texts) != 0:
-                last_mess[key_j] = texts[0]
+                last_mess[key_i+key_j] = texts[0]
                 send_package['qq_group_id'] = key_i
                 send_package['qq_id_list'] = json_reader[key_i][key_j]
                 send_package['text'] = texts
