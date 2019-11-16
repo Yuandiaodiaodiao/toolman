@@ -6,6 +6,8 @@ CQP.cfg
 Account.cfg
 CQA.key
 CQP.key
+botexe/data/*
+!botexe/data/app
 
 .idea/
 # Byte-compiled / optimized / DLL files

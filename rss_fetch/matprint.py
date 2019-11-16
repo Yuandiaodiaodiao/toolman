@@ -8,9 +8,10 @@ def mat_put(a):
                 if i == k or i == l - k - 1 or j == k or j == l - k - 1:
                     listl[i][j] = a[k]
                     break
+    return listl
     for i in range(0,l):
         print(listl[i])
 
 
 
-mat_put([1, 2, 3])
+# mat_put([1, 2, 3])
