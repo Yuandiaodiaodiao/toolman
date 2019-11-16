@@ -7,9 +7,11 @@ import handler
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
         self.write("Hello, world")
+        self.write('ok')
 
     def post(self):
-        data = json.loads(self.request.body)
+        data = json.loads(self.request.body, encoding='utf-8')
+        self.write('ok')
         handler.handler(data)
 
 
