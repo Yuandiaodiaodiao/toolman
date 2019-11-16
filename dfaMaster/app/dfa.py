@@ -1,5 +1,5 @@
-from api import api_contain, Node
-from api import read_file, add_word, add_sensitives
+from .api import api_contain, Node
+from .api import read_file, add_word, add_sensitives
 
 
 class DFA(object):

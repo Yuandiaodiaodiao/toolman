@@ -2,23 +2,14 @@ from nonebot import on_command, CommandSession
 from nonebot.typing import Context_T
 from nonebot import NoneBot
 import nonebot
-from messages.handler import handler
 import nonebot.helpers
 import json
 import requests
+
+import aiohttp
+
+
 bot = nonebot.get_bot()
-
-
-@on_command('weather', aliases=('天气', '天气预报', '查天气'))
-async def weather(session: CommandSession):
-    # 从会话状态（session.state）中获取城市名称（city），如果当前不存在，则询问用户
-    city = session.get('city', prompt='你想查询哪个城市的天气呢？')
-    # 获取城市的天气预报
-    weather_report=' 1'
-    # 向用户发送天气预报
-    await session.send(weather_report)
-
-
 # weather.args_parser 装饰器将函数声明为 weather 命令的参数解析器
 # 命令解析器用于将用户输入的参数解析成命令真正需要的数据
 
@@ -44,7 +35,12 @@ async def handle_group_message(ctx: Context_T):
         "text": text,
         "img": imageList
     }
-    requests.post('http://192.168.137.205:50383',data=json.dumps(data))
+    try:
+        async with aiohttp.request('POST', 'http://192.168.137.205:50383', data=json.dumps(data),timeout=3)as r:
+            pass
+        # requests.post('http://192.168.137.205:50383',data=json.dumps(data),timeout=3)
+    except:
+        print('rss server error')
     # ret = handler(data)
     # if str(ctx.get('group_id')) == '967636480':
     #     pass
