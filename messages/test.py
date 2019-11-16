@@ -1,9 +1,5 @@
 import json
 import os
 
-a = os.listdir('images/have_name')
-bqb = {}
-for item in os.listdir('images/have_name'):
-    name = item.split('.')[0]
-    bqb[name] = 'images/have_name/' + item
-print(bqb)
+a="我就发动"
+print(a.encode('utf-8').decode('utf-8'))
