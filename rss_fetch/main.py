@@ -53,7 +53,7 @@ while True:
                     img_pos_r = re.search('.jpg', lis['content'][0]['value']).span()[1]
                     picture.append(lis['content'][0]['value'][img_pos_l:img_pos_r])
                 # elif is_sdu:
-                    # print(lis)
+                # print(lis)
                 if key_j in last_mess:
                     if text == last_mess[key_j]:
                         break
