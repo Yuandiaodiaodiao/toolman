@@ -8,12 +8,12 @@ POST_URL = "192.168.137.1:50382"
 def send_message(qq_group_id, qq_id_list, text, img):
     print(qq_group_id, qq_id_list, text, img)
     try:
-        requests.post(POST_URL, json={
+        requests.post(POST_URL, data=json.dumps({
             "qq_group_id": qq_group_id,
             "qq_id_list": qq_id_list,
             "text": text,
             "img": img
-        })
+        }))
     except requests.exceptions.InvalidSchema:
         print("网络错误")
 
