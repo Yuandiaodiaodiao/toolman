@@ -30,14 +30,19 @@ async def handle_group_message(ctx: Context_T):
     #     ctx['at'] = True
     # if not ctx.get('at'):
     #     return
+    imageList=[]
+
     for i in ctx.get('message'):
         if i.type == 'text':
             text += i.data['text']
+        if i.type=='image':
+            imageList.append(i.data['url'])
+
     data = {
         "qq_group_id": str(ctx.get('group_id')),
         "qq_id": str(ctx.get('user_id')),
         "text": text,
-        "img": ''
+        "img": imageList
     }
     requests.post('http://192.168.137.205:50383',data=json.dumps(data))
     # ret = handler(data)
