@@ -1,6 +1,8 @@
 from .dfa import DFA
 filename = "../dfaMaster/app/keywords"
 dfa = DFA(filename)
+
+
 def check_sensitive(content):
 
     return dfa.dfa(content)[0]
