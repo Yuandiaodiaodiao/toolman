@@ -1,3 +1,6 @@
 requests
 feedparser
 nonebot
+aiohttp
+"nonebot[scheduler]"
+beautifulsoup4

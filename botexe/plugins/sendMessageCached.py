@@ -5,20 +5,23 @@ import pytz
 from aiocqhttp.exceptions import Error as CQHttpError
 import json
 from nonebot.message import MessageSegment, Message
-
+import aiohttp
 
 @nonebot.scheduler.scheduled_job('interval', seconds=1)
 async def _():
     bot = nonebot.get_bot()
-
     try:
         pass
         data = {
             'formBot': True
         }
         try:
-            res = requests.post('http://127.0.0.1:50382', data=json.dumps(data))
-            js = json.loads(res.text)
+            async with aiohttp.request('POST', 'http://127.0.0.1:50382', data=json.dumps(data))as r:
+                js = await r.text()
+                js = json.loads(js)
+            # res = requests.post('http://127.0.0.1:50382', data=json.dumps(data),timeout=3)
+            # js = json.loads(res.text)
+            # print('messcache')
         except:
             return
         for i in js:
@@ -38,14 +41,14 @@ async def _():
                     msg.extend(textObj)
                 except:
                     print(f'i.get() error')
-            imageList=i.get('img')
-            if isinstance(imageList,list):
+            imageList = i.get('img')
+            if isinstance(imageList, list):
                 for j in imageList:
-                    if len(j)>0:
+                    if len(j) > 0:
                         msg.append(MessageSegment.image(j))
             else:
                 try:
-                    if len(imageList)>0:
+                    if len(imageList) > 0:
                         msg.append(MessageSegment.image(imageList))
                 except:
                     print(f'image send error')

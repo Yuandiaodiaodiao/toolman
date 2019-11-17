@@ -1,7 +1,10 @@
 import tornado.ioloop
 import tornado.web
 import json
-globalMessage=[]
+
+globalMessage = []
+
+
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
         self.write("Hello, world")
@@ -9,19 +12,21 @@ class MainHandler(tornado.web.RequestHandler):
     def pullMessage(self):
         return globalMessage
         pass
+
     def post(self):
         global globalMessage
         js = json.loads(self.request.body)
         print(js)
         if js.get('formBot'):
-            res=self.pullMessage()
+            res = self.pullMessage()
             self.write(json.dumps(res))
-            globalMessage=[]
+            globalMessage = []
             return
         else:
-            globalMessage.append(js)
+            if len(self.request.body) > 1:
+                globalMessage.append(js)
 
-        self.write('')
+            self.write('')
         return
 
 
