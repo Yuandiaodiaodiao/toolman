@@ -29,7 +29,7 @@ while True:
             send_package = {}
             rss_reader = feedparser.parse(key_j.replace(RSSHUB_URL, OUT_RSSHUB_URL))
             # print(rss_reader.keys())
-            # print(rss_reader['entries'])
+            # print(rss_reader['feed'])
             texts = []
             picture = []
             is_pxj = re.search('bilibili', key_j)
@@ -39,7 +39,7 @@ while True:
                 if index >= MESSES_NUMBER:
                     break
                 text = ''
-                text = 'title:' + lis['title'] + '\n' + lis['link']
+                text = rss_reader['feed']['title'] + ':\n' + lis['title'] + '\n' + lis['link']
                 # if 'author' in lis:
                 #     text = text + '\n' + lis['author']
                 if is_pxj:
