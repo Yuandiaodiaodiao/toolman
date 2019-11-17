@@ -39,7 +39,7 @@ while True:
                 if index >= MESSES_NUMBER:
                     break
                 text = ''
-                text = lis['title'] + '\n' + lis['link']
+                text = 'title:' + lis['title'] + '\n' + lis['link']
                 # if 'author' in lis:
                 #     text = text + '\n' + lis['author']
                 if is_pxj:
