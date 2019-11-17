@@ -4,6 +4,7 @@ import json
 import re
 import requests
 from urllib import request
+import datetime
 
 MESSES_NUMBER = 1
 IP_ADDRESS = 'http://192.168.137.1:50382'
@@ -21,12 +22,14 @@ def check_url(url):
 
 last_mess = {}
 while True:
+    print('新的一轮', datetime.datetime.now())
     with open('rss_list.json', encoding='utf-8') as fin:
         content = fin.read()
     json_reader = json.loads(content)
     for key_i in json_reader.keys():
         for key_j in json_reader[key_i].keys():
             send_package = {}
+            print(key_j.replace(RSSHUB_URL, OUT_RSSHUB_URL))
             rss_reader = feedparser.parse(key_j.replace(RSSHUB_URL, OUT_RSSHUB_URL))
             # print(rss_reader.keys())
             # print(rss_reader['entries'])
@@ -52,13 +55,13 @@ while True:
                     img_pos_r = re.search('.jpg', lis['content'][0]['value']).span()[1]
                     picture.append(lis['content'][0]['value'][img_pos_l:img_pos_r])
                 # elif is_sdu:
-                    # print(lis)
-                if key_i+key_j in last_mess:
-                    if text == last_mess[key_i+key_j]:
+                # print(lis)
+                if key_i + key_j in last_mess:
+                    if text == last_mess[key_i + key_j]:
                         break
                 texts.append(text)
             if len(texts) != 0:
-                last_mess[key_i+key_j] = texts[0]
+                last_mess[key_i + key_j] = texts[0]
                 send_package['qq_group_id'] = key_i
                 send_package['qq_id_list'] = json_reader[key_i][key_j]
                 send_package['text'] = texts
