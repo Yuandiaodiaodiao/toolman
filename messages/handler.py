@@ -15,7 +15,7 @@ bqb = json.load(open('image_list.json', encoding='utf-8'))
 
 def check_url(url):
     try:
-        res = requests.get(url)
+        res = requests.get(url.replace(RSSHUB_URL, OUR_RSSHUB_URL))
     except Exception as e:
         print('url 不能访问' + str(e))
         return False
