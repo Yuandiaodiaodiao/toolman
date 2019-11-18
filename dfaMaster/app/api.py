@@ -35,12 +35,23 @@ def read_file(sensitive_file: str) -> set:
     return ret
 
 
+def clear_word(root: Node, word: str) -> None:
+    parent = root
+    for index,w in enumerate(word):
+        if parent and parent.next and parent.next.get(w):
+            parent = parent.next[w]
+        if len(word)-1==index:
+            parent.next=None
+
+
 def add_sensitives(root: Node, words: set) -> None:
     """
     构建敏感词字典库
     """
     for key in words:
         add_word(root, key)
+    for key in words:
+        clear_word(root, key)
 
 
 def api_contain(msg: str, root: Node, stop: bool = True) -> (bool, set):
@@ -59,7 +70,7 @@ def api_contain(msg: str, root: Node, stop: bool = True) -> (bool, set):
     for idx, m in enumerate(msg):  # 遍历文本
         j = idx
         _root = root
-        while _root.next != None and msg[j] in _root.next:  # 从根开始寻找
+        while _root.next != None and j < len(msg) and msg[j] in _root.next:  # 从根开始寻找
             _root = _root.next.get(msg[j])  # 依次向下寻找
             j += 1
 

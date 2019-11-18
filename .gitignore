@@ -8,7 +8,9 @@ CQP.key
 botexe/data/*
 !botexe/data/app
 install/
-
+boxexe/bin/*
+!boxexe/bin/zlib1.dll
+!boxexe/bin/libeay32.dll
 .idea/
 # Byte-compiled / optimized / DLL files
 __pycache__/

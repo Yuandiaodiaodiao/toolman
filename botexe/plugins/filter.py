@@ -1,4 +1,4 @@
-from nonebot import on_command, CommandSession
+from nonebot import on_command, CommandSession, CQHttpError
 from nonebot.typing import Context_T
 import nonebot.helpers
 import nonebot
@@ -17,6 +17,11 @@ async def handle_group_message(ctx: Context_T):
     except:
         print('dfa error')
         return
-    if ifDangerous:
+    if ifDangerous :
         text='危险言论'
-        await nonebot.helpers.send(bot=bot, ctx=ctx, message=text)
+        try:
+            pass
+            info = await bot.delete_msg(message_id=ctx['message_id'])
+        except CQHttpError:
+            pass
+        # await nonebot.helpers.send(bot=bot, ctx=ctx, message=text)

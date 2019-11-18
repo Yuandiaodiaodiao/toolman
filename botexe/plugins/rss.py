@@ -36,11 +36,14 @@ async def handle_group_message(ctx: Context_T):
         "img": imageList
     }
     try:
-        async with aiohttp.request('POST', 'http://192.168.137.205:50383', data=json.dumps(data),timeout=3)as r:
+        async with aiohttp.request('POST', 'http://192.168.137.205:50383', data=json.dumps(data))as r:
+            js=await r.text()
+            print(js)
+            print('finish')
             pass
         # requests.post('http://192.168.137.205:50383',data=json.dumps(data),timeout=3)
-    except:
-        print('rss server error')
+    except Exception as e:
+        print('rss server error'+str(e))
     # ret = handler(data)
     # if str(ctx.get('group_id')) == '967636480':
     #     pass
