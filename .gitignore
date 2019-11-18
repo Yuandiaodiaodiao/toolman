@@ -8,7 +8,7 @@ CQP.key
 botexe/data/*
 !botexe/data/app
 install/
-botexe/bin/*.dll
+botexe/bin/*
 !botexe/bin/zlib1.dll
 !botexe/bin/libeay32.dll
 .idea/
