@@ -1,4 +1,3 @@
+# -*- coding: <encoding name> -*-
 import os
-os.system("""
-docker-compose -f docker-compose.yml up -d –no-recreate
-""")
+os.system("docker-compose up -d -no-recreate")
