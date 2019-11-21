@@ -9,6 +9,7 @@ from os import path
 
 if __name__ == "__main__":
     sys.path.append("..")
+    sys.path.append(path.dirname(__file__))
     nonebot.init(config)
     # nonebot.load_builtin_plugins()
     nonebot.load_plugins(
