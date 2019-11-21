@@ -1,9 +1,14 @@
 import nonebot
+import sys
+import os
+# nowpath=os.path.split(os.path.realpath(__file__))[0]
+# sys.path.append("./")
 import config
 from os import path
 
 
 if __name__ == "__main__":
+    sys.path.append("..")
     nonebot.init(config)
     # nonebot.load_builtin_plugins()
     nonebot.load_plugins(

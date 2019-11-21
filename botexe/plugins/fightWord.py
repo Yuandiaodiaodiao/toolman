@@ -1,7 +1,6 @@
 from nonebot import on_command, CommandSession
 from nonebot.message import Message, MessageSegment
 import aiohttp
-import json
 import ab
 
 @on_command('和我对线')

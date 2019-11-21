@@ -1,4 +1,3 @@
-from tool.tools import emojiToHex
 import ab
 from nonebot import on_command, CommandSession
 from nonebot.message import Message, MessageSegment
