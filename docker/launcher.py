@@ -7,10 +7,13 @@ def cp():
         os.mkdir("./coolq/bin")
     except:
         pass
-    shutil.copyfile("../botexe/bin/cqc.exe", "./coolq/bin")
-    shutil.copyfile("../botexe/bin/ffmpeg.exe", "./coolq/bin")
-    shutil.copyfile("../botexe/bin/libeay32.dll", "./coolq/bin")
-    shutil.copyfile("../botexe/bin/zlib1.dll", "./coolq/bin")
+    copyList=["cqc.exe","ffmpeg.exe"]
+    fromdir="../botexe/bin"
+    todir="./coolq/bin"
+    for name in copyList:
+        shutil.copyfile(os.path.join(fromdir,name),os.path.join(todir,name))
+    # shutil.copyfile("../botexe/bin/libeay32.dll", "./coolq/bin")
+    # shutil.copyfile("../botexe/bin/zlib1.dll", "./coolq/bin")
 
 if __name__ == "__main__":
     op = sys.argv[1]
