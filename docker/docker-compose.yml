@@ -1,8 +1,8 @@
-version: "0.1"
+version: "0.2"
 services:
 
   coolqbot:
-    image: he0119/coolqbot:latest
+    image: richardchien/cqhttp:latest
     container_name: coolqbot
     restart: always
     ports:
@@ -12,6 +12,9 @@ services:
       - VNC_PASSWD=Wangzixi
       - COOLQ_ACCOUNT=2089883591
       - COOLQ_URL=https://dlsec.cqp.me/cqp-full
+      - CQHTTP_SERVE_DATA_FILES=yes
+      - COOLQ_WS_REVERSE_API_URL=ws://ip.oops-sdu.cn:9002/ws/api/
+      - COOLQ_WS_REVERSE_EVENT_URL=ws://ip.oops-sdu.cn:9002/ws/api/
+      - COOLQ_WS_REVERSE=true
     volumes:
       - ./coolq:/home/user/coolq
-      - ./bot:/home/user/coolqbot/bot

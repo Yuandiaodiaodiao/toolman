@@ -11,6 +11,10 @@ install/
 botexe/bin/*
 !botexe/bin/zlib1.dll
 !botexe/bin/libeay32.dll
+!botexe/bin/cqc.exe
+!botexe/bin/ffmpeg.exe
+docker/coolq/
+
 .idea/
 # Byte-compiled / optimized / DLL files
 __pycache__/
