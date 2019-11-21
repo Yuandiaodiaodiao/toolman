@@ -6,7 +6,6 @@ import os
 import config
 from os import path
 
-
 if __name__ == "__main__":
     toolmandir=os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
     sys.path.append(toolmandir)
