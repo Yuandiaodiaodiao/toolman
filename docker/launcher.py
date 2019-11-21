@@ -14,6 +14,15 @@ def cp():
         shutil.copyfile(os.path.join(fromdir,name),os.path.join(todir,name))
     # shutil.copyfile("../botexe/bin/libeay32.dll", "./coolq/bin")
     # shutil.copyfile("../botexe/bin/zlib1.dll", "./coolq/bin")
+def accountIn(account):
+    cqpcfg=f"""
+    [App]
+        io.github.richardchien.coolqhttpapi.status=1
+    [Login]
+        Account={account}
+    """
+    with open("./coolq/conf/CQP.cfg",'w')as f:
+        f.write(cqpcfg)
 
 if __name__ == "__main__":
     op = sys.argv[1]
