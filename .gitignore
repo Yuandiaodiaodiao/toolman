@@ -7,6 +7,7 @@ CQA.key
 CQP.key
 botexe/data/*
 !botexe/data/app
+botexe/dev/
 install/
 botexe/bin/*
 !botexe/bin/zlib1.dll

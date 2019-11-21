@@ -1,8 +1,7 @@
-from nonebot import on_command, CommandSession, CQHttpError
+from nonebot import CQHttpError
 from nonebot.typing import Context_T
-import nonebot.helpers
 import nonebot
-from dfaMaster.app.test import check_sensitive
+from dfaMaster import check_sensitive
 bot = nonebot.get_bot()
 @bot.on_message('group')
 async def handle_group_message(ctx: Context_T):

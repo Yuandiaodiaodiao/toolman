@@ -1,14 +1,13 @@
 from datetime import datetime
 import requests
 import nonebot
-import pytz
 from aiocqhttp.exceptions import Error as CQHttpError
 import json
 from nonebot.message import MessageSegment, Message
 import aiohttp
-
-@nonebot.scheduler.scheduled_job('interval', seconds=1)
-async def _():
+timeWait=2
+@nonebot.scheduler.scheduled_job('interval', seconds=timeWait)
+async def sendMessageCached():
     bot = nonebot.get_bot()
     try:
         pass
@@ -16,7 +15,8 @@ async def _():
             'formBot': True
         }
         try:
-            async with aiohttp.request('POST', 'http://127.0.0.1:50382', data=json.dumps(data))as r:
+
+            async with aiohttp.request('POST', 'http://127.0.0.1:50382', data=json.dumps(data),timeout=aiohttp.client.ClientTimeout(total=timeWait-1))as r:
                 js = await r.text()
                 js = json.loads(js)
             # res = requests.post('http://127.0.0.1:50382', data=json.dumps(data),timeout=3)

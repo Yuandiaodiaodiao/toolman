@@ -8,9 +8,8 @@ from os import path
 
 
 if __name__ == "__main__":
-    sys.path.append("..")
-    sys.path.append("./")
-    sys.path.append(path.dirname(__file__))
+    toolmandir=os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+    sys.path.append(toolmandir)
     nonebot.init(config)
     # nonebot.load_builtin_plugins()
     nonebot.load_plugins(
