@@ -6,7 +6,7 @@ Account.cfg
 CQA.key
 CQP.key
 botexe/data/*
-!botexe/data/app
+!botexe/data/app/io.github.richardchien.coolqhttpapi
 botexe/dev/
 install/
 botexe/bin/*

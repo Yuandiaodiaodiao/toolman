@@ -10,7 +10,6 @@ services:
       - "9001:9001"
     environment:
       - VNC_PASSWD=Wangzixi
-      - COOLQ_ACCOUNT=2089883591
       - COOLQ_URL=https://dlsec.cqp.me/cqp-full
     volumes:
       - ./coolq:/home/user/coolq
