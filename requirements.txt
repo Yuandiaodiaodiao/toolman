@@ -5,3 +5,5 @@ aiohttp
 nonebot[scheduler]
 beautifulsoup4
 docker-compose
+tornado
+pytz
