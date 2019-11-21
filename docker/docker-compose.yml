@@ -12,9 +12,5 @@ services:
       - VNC_PASSWD=Wangzixi
       - COOLQ_ACCOUNT=2089883591
       - COOLQ_URL=https://dlsec.cqp.me/cqp-full
-      - CQHTTP_SERVE_DATA_FILES=yes
-      - COOLQ_WS_REVERSE_API_URL=ws://ip.oops-sdu.cn:9002/ws/api/
-      - COOLQ_WS_REVERSE_EVENT_URL=ws://ip.oops-sdu.cn:9002/ws/api/
-      - COOLQ_WS_REVERSE=true
     volumes:
       - ./coolq:/home/user/coolq
