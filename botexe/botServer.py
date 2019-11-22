@@ -3,13 +3,15 @@ import sys
 import os
 # nowpath=os.path.split(os.path.realpath(__file__))[0]
 # sys.path.append("./")
-import botexe.config
+import config
 from os import path
 
 if __name__ == "__main__":
     toolmandir=os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
     sys.path.append(toolmandir)
-    nonebot.init(botexe.config)
+    toolmandir = os.path.abspath(os.path.dirname(__file__))
+    sys.path.append(toolmandir)
+    nonebot.init(config)
     # nonebot.load_builtin_plugins()
     nonebot.load_plugins(
         path.join(path.dirname(__file__), 'plugins'),
