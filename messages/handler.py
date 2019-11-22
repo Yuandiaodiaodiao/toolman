@@ -7,7 +7,7 @@ from urllib import request
 
 RSSHUB_URL = "https://rsshub.app"
 OUR_RSSHUB_URL = "http://server.oops-sdu.cn:1200"
-POST_URL = "http://192.168.137.1:50382"
+POST_URL = "http://127.0.0.1:9003"
 PATH_THIS_FLODER=os.path.dirname(os.path.abspath(__file__))
 PATH_FATHER_FLODER=os.path.dirname(PATH_THIS_FLODER)
 PATH_IMAGE_LIST=os.path.join(PATH_THIS_FLODER,'image_list.json')

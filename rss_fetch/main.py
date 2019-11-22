@@ -22,7 +22,7 @@ def check_url(url):
 def run():
     last_mess = {}
     while True:
-        print('新的一轮', datetime.datetime.now())
+        # print('新的一轮', datetime.datetime.now())
         with open(os.path.join(os.path.dirname(os.path.abspath(__file__)),'rss_list.json'), encoding='utf-8') as fin:
             content = fin.read()
         json_reader = json.loads(content)
