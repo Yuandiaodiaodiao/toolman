@@ -11,7 +11,7 @@ if __name__ == "__main__":
     else:
         pipstr = "pip"
     os.system(f"{pipstr}   install -r requirements.txt")
-    os.system(f'{pipstr}   install "nonebot[scheduler]"')
+    os.system(f"""{pipstr}   install "nonebot[scheduler]" """)
 
     # install ab
     try:
