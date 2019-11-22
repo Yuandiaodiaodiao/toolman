@@ -3,11 +3,11 @@ import sys
 import os
 # nowpath=os.path.split(os.path.realpath(__file__))[0]
 # sys.path.append("./")
-import config
+from . import config
 from os import path
 
-if __name__ == "__main__":
-    toolmandir=os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+def run():
+    toolmandir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
     sys.path.append(toolmandir)
     toolmandir = os.path.abspath(os.path.dirname(__file__))
     sys.path.append(toolmandir)
@@ -17,5 +17,7 @@ if __name__ == "__main__":
         path.join(path.dirname(__file__), 'plugins'),
         'plugins'
     )
+    nonebot.run(host='0.0.0.0', port=9002)
 
-    nonebot.run(host='ip.oops-sdu.cn', port=9002)
+if __name__ == "__main__":
+    run()

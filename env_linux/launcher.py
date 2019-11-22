@@ -55,12 +55,12 @@ def accountIn(account):
         f.write(cqAccount)
 def config(account):
     global jsglobalconfig
-    configdir = "./coolq/data/app/io.github.richardchien.coolqhttpapi/config"
+    configdir = "./coolq/app/io.github.richardchien.coolqhttpapi/config"
     try:
-        os.makedirs("./coolq/data/app/io.github.richardchien.coolqhttpapi/config")
+        os.makedirs(configdir)
     except:
         pass
-    serverip = "ip.oops-sdu.cn"
+    serverip = "host.docker.internal"
     serverport = "9002"
     jsglobalconfig["ws_reverse_api_url"] = f"ws://{serverip}:{serverport}/ws/api/"
     jsglobalconfig["ws_reverse_event_url"] = f"ws://{serverip}:{serverport}/ws/event/"

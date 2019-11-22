@@ -11,5 +11,8 @@ services:
     environment:
       - VNC_PASSWD=Wangzixi
       - COOLQ_URL=https://dlsec.cqp.me/cqp-full
+      - CQHTTP_USE_WS_REVERSE=yes
+      - CQHTTP_WS_REVERSE_API_URL=ws://host.docker.internal:9002/ws/api/
+      - CQHTTP_WS_REVERSE_EVENT_URL=ws://host.docker.internal:9002/ws/event/
     volumes:
       - ./coolq:/home/user/coolq

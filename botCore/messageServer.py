@@ -29,10 +29,11 @@ class MainHandler(tornado.web.RequestHandler):
             self.write('')
         return
 
-
-if __name__ == "__main__":
+def run():
     application = tornado.web.Application([
         (r"/", MainHandler),
     ])
     application.listen(9003)
     tornado.ioloop.IOLoop.current().start()
+if __name__ == "__main__":
+    run()

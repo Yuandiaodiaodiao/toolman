@@ -1,7 +1,7 @@
 import tornado.ioloop
 import tornado.web
 import json
-import handler
+from . import handler
 
 
 class MainHandler(tornado.web.RequestHandler):
@@ -16,9 +16,13 @@ class MainHandler(tornado.web.RequestHandler):
         handler.handler(data)
 
 
-if __name__ == "__main__":
+def run():
     application = tornado.web.Application([
         (r"/", MainHandler),
     ])
-    application.listen(50383)
+    application.listen(9004)
     tornado.ioloop.IOLoop.current().start()
+
+
+if __name__ == "__main__":
+    run()

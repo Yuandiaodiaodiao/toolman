@@ -8,9 +8,12 @@ from urllib import request
 RSSHUB_URL = "https://rsshub.app"
 OUR_RSSHUB_URL = "http://server.oops-sdu.cn:1200"
 POST_URL = "http://192.168.137.1:50382"
-
+PATH_THIS_FLODER=os.path.dirname(os.path.abspath(__file__))
+PATH_FATHER_FLODER=os.path.dirname(PATH_THIS_FLODER)
+PATH_IMAGE_LIST=os.path.join(PATH_THIS_FLODER,'image_list.json')
+PATH_RSS_LIST=os.path.join(PATH_FATHER_FLODER,'rss_fetch/rss_list.json')
 # 表情包初始化
-bqb = json.load(open('image_list.json', encoding='utf-8'))
+bqb = json.load(open(PATH_IMAGE_LIST, encoding='utf-8'))
 
 
 def check_url(url):
@@ -44,7 +47,7 @@ def add_rss_url(data, rss_url, at):
     if not check_url(rss_url):
         send_message(data['qq_group_id'], [data['qq_id']], f"你给的 url 不能访问！", "")
         return
-    json_list = json.load(open("../rss_fetch/rss_list.json"))
+    json_list = json.load(open(PATH_RSS_LIST))
     json_item = json_list[data['qq_group_id']]
     if rss_url in json_item.keys() and not at:  # 他想添加这个 url，但是已存在
         send_message(data['qq_group_id'], [data['qq_id']], f"👴已经订阅这个 url 了，不要重复订阅！", "")
@@ -55,11 +58,11 @@ def add_rss_url(data, rss_url, at):
         json_item[rss_url].append(data['qq_id'])
         json_item[rss_url] = list(set(json_item[rss_url]))
         send_message(data['qq_group_id'], [data['qq_id']], f"当 {rss_url} 更新时会提醒你。", "")
-    json.dump(json_list, open("../rss_fetch/rss_list.json", "w"), ensure_ascii=False)
+    json.dump(json_list, open(PATH_RSS_LIST, "w"), ensure_ascii=False)
 
 
 def del_rss_url(data, rss_url, at):
-    json_list = json.load(open("../rss_fetch/rss_list.json"))
+    json_list = json.load(open(PATH_RSS_LIST))
     json_item = json_list[data['qq_group_id']]
     if rss_url not in json_item.keys():  # 删除这个 url，但是不存在
         send_message(data['qq_group_id'], [data['qq_id']], f"此 url 未被订阅", "")
@@ -69,27 +72,27 @@ def del_rss_url(data, rss_url, at):
     if at:
         json_item[rss_url].remove(data['qq_id'])
         send_message(data['qq_group_id'], [data['qq_id']], f"已将你从 {rss_url} 的提醒列表中删除。", "")
-    json.dump(json_list, open("../rss_fetch/rss_list.json", "w"), ensure_ascii=False)
+    json.dump(json_list, open(PATH_RSS_LIST, "w"), ensure_ascii=False)
 
 
 def add_bqb(data, key_word, img_url_list):
     global bqb
     print(key_word)
-    bqb = json.load(open('image_list.json', encoding='utf-8'))
+    bqb = json.load(open(PATH_IMAGE_LIST, encoding='utf-8'))
     if key_word not in bqb:
         bqb[key_word] = []
     bqb[key_word] += img_url_list
-    json.dump(bqb, open('image_list.json', 'w', encoding='utf-8'), ensure_ascii=False)
+    json.dump(bqb, open(PATH_IMAGE_LIST, 'w', encoding='utf-8'), ensure_ascii=False)
     simple_send_message(data, f'已添加 {key_word}')
 
 
 def del_bqb(data, key_word):
     global bqb
-    bqb = json.load(open('image_list.json', encoding='utf-8'))
+    bqb = json.load(open(PATH_IMAGE_LIST, encoding='utf-8'))
     if key_word not in bqb:
         bqb[key_word] = []
     bqb.pop(key_word)
-    json.dump(bqb, open('image_list.json', 'w', encoding='utf-8'), ensure_ascii=False)
+    json.dump(bqb, open(PATH_IMAGE_LIST, 'w', encoding='utf-8'), ensure_ascii=False)
     simple_send_message(data, f'已删除 {key_word}')
 
 
@@ -120,7 +123,7 @@ def handler_command(data):
         del_bqb(data, text[2])
     elif len(text) > 1 and text[1] == 'status':
         send_message(data['qq_group_id'], [data['qq_id']], '🐎订阅列表：\n'
-                     + json.dumps(json.load(open("../rss_fetch/rss_list.json")), indent=2, ensure_ascii=False)
+                     + json.dumps(json.load(open(PATH_RSS_LIST)), indent=2, ensure_ascii=False)
                      + '\n🐎表情包列表：\n' + json.dumps(bqb, indent=2, ensure_ascii=False), "")
     else:
         send_message(data['qq_group_id'], [data['qq_id']], "星际玩家，给👴把文档看清楚再发命令！", "")
@@ -147,7 +150,7 @@ def handler(data):
     :return:
     """
 
-    json_list = json.load(open("../rss_fetch/rss_list.json"))
+    json_list = json.load(open(PATH_RSS_LIST))
     data['text'] = data['text'].strip()
     print('--------')
     print(data)

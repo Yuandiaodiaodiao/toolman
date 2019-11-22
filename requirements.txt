@@ -8,3 +8,4 @@ docker-compose
 tornado
 pytz
 lxml
+ujson

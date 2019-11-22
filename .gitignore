@@ -14,7 +14,7 @@ env_windows/bin/*
 !env_windows/bin/libeay32.dll
 !env_windows/bin/cqc.exe
 !env_windows/bin/ffmpeg.exe
-docker/coolq/
+env_linux/coolq/
 config.json
 .idea/
 # Byte-compiled / optimized / DLL files

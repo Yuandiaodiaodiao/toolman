@@ -36,7 +36,7 @@ async def handle_group_message(ctx: Context_T):
         "img": imageList
     }
     try:
-        async with aiohttp.request('POST', 'http://192.168.137.205:50383', data=json.dumps(data),timeout=aiohttp.client.ClientTimeout(total=timewait))as r:
+        async with aiohttp.request('POST', 'http://127.0.0.1:9004', data=json.dumps(data),timeout=aiohttp.client.ClientTimeout(total=timewait))as r:
             js=await r.text()
             print(js)
             print('finish')
