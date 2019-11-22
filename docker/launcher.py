@@ -27,12 +27,12 @@ def cp():
     except:
         pass
     copyList = ["cqc.exe", "ffmpeg.exe"]
-    fromdir = "../botexe/bin"
+    fromdir = "../env_windows/bin"
     todir = "./coolq/bin"
     for name in copyList:
         shutil.copyfile(os.path.join(fromdir, name), os.path.join(todir, name))
-    # shutil.copyfile("../botexe/bin/libeay32.dll", "./coolq/bin")
-    # shutil.copyfile("../botexe/bin/zlib1.dll", "./coolq/bin")
+    # shutil.copyfile("../env_windows/bin/libeay32.dll", "./coolq/bin")
+    # shutil.copyfile("../env_windows/bin/zlib1.dll", "./coolq/bin")
 
 
 def accountIn(account):
