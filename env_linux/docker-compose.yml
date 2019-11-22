@@ -7,7 +7,6 @@ services:
     restart: always
     ports:
       - "9000:9000"
-      - "9001:9001"
     environment:
       - VNC_PASSWD=Wangzixi
       - COOLQ_URL=https://dlsec.cqp.me/cqp-full

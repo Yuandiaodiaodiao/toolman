@@ -16,7 +16,7 @@ class MainHandler(tornado.web.RequestHandler):
     def post(self):
         global globalMessage
         js = json.loads(self.request.body)
-        print(js)
+        # print(js)
         if js.get('formBot'):
             res = self.pullMessage()
             self.write(json.dumps(res))
