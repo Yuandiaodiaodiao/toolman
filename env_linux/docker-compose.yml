@@ -13,5 +13,8 @@ services:
       - CQHTTP_USE_WS_REVERSE=yes
       - CQHTTP_WS_REVERSE_API_URL=ws://host.docker.internal:9002/ws/api/
       - CQHTTP_WS_REVERSE_EVENT_URL=ws://host.docker.internal:9002/ws/event/
+      - CQHTTP_SHOW_LOG_CONSOLE=no
+      - CQHTTP_USE_HTTP=no
+      - CQHTTP_USE_WS=no
     volumes:
       - ./coolq:/home/user/coolq

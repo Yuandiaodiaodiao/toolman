@@ -26,7 +26,7 @@ def cp():
         os.mkdir("./coolq/bin")
     except:
         pass
-    copyList = ["cqc.exe", "ffmpeg.exe"]
+    copyList = ["cqc.exe", "ffmpeg.exe","libeay32.dll","zlib1.dll"]
     fromdir = "../env_windows/bin"
     todir = "./coolq/bin"
     for name in copyList:
@@ -79,7 +79,7 @@ if __name__ == "__main__":
         os.system("docker-compose up -d --no-recreate")
         cp()
         accountIn(qqid)
-        config(qqid)
+        # config(qqid)
     if op == "ps":
         os.system("docker-compose ps")
     if op == "cp":
