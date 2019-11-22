@@ -16,4 +16,4 @@ if __name__ == "__main__":
         'plugins'
     )
 
-    nonebot.run(host='127.0.0.1', port=9002)
+    nonebot.run(host='ip.oops-sdu.cn', port=9002)
