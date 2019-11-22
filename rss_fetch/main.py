@@ -5,12 +5,13 @@ import re
 import requests
 from urllib import request
 import datetime
+import socket
 import os
 MESSES_NUMBER = 1
 IP_ADDRESS = 'http://127.0.0.1:9003'
 RSSHUB_URL = "https://rsshub.app"
 OUT_RSSHUB_URL = "http://server.oops-sdu.cn:1200"
-
+socket.setdefaulttimeout(5)
 
 def check_url(url):
     with request.urlopen(url) as file:
