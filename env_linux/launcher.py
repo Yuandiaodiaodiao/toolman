@@ -94,7 +94,6 @@ def run(op):
         with open(pathYml, 'r')as f:
             yml = yaml.load(f)
 
-
         if configJs["isPro"]:
             coolq_url = configJs["Pro_url"]
         else:
@@ -110,13 +109,15 @@ def run(op):
         with open(pathYml, 'w')as f:
             yaml.dump(yml, f)
         try:
-            os.mkdir("./coolq")
+            os.mkdir(os.path.join(PATH_THIS_FLODER, "./coolq"))
         except:
             pass
+        os.chdir(PATH_THIS_FLODER)
         os.system("docker-compose up -d --no-recreate")
         cp()
         accountIn(qqid)
         # config(qqid)
+
     if op == "ps":
         os.system("docker-compose ps")
     if op == "cp":
@@ -130,8 +131,7 @@ def run(op):
     if op == "rm":
         os.system("docker-compose rm -s -f")
     if op == "clear":
-        os.system("rm -rf ./coolq")
-
+        os.system("rm -rf ./coolq")`
 
 if __name__ == "__main__":
     try:
