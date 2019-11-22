@@ -91,8 +91,10 @@ def run(op):
     qqid = configJs["qq_id"]
     if op == "init":
         pathYml = os.path.join(PATH_THIS_FLODER, "docker-compose.yml")
+        yaml.warnings({'YAMLLoadWarning': False})
         with open(pathYml, 'r')as f:
-            yml = yaml.load(stream=f, Loader=yaml.FullLoader())
+            yml = yaml.load(f)
+            
 
         if configJs["isPro"]:
             coolq_url = configJs["Pro_url"]
