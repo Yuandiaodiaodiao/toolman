@@ -5,6 +5,7 @@ from aiocqhttp.exceptions import Error as CQHttpError
 import json
 from nonebot.message import MessageSegment, Message
 import aiohttp
+from myConfig.configJson import configJs
 
 timeWait = 2
 
@@ -19,7 +20,7 @@ async def sendMessageCached():
         }
         try:
 
-            async with aiohttp.request('POST', 'http://127.0.0.1:9003', data=json.dumps(data),
+            async with aiohttp.request('POST', f'http://{configJs["serverip"]}:{configJs["messageServerListen"]}', data=json.dumps(data),
                                        timeout=aiohttp.client.ClientTimeout(total=timeWait - 1))as r:
                 js = await r.text()
                 js = json.loads(js)

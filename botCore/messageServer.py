@@ -33,7 +33,8 @@ def run():
     application = tornado.web.Application([
         (r"/", MainHandler),
     ])
-    application.listen(9003)
+    from myConfig.configJson import configJs
+    application.listen(configJs['messageServerListen'])
     tornado.ioloop.IOLoop.current().start()
 if __name__ == "__main__":
     run()

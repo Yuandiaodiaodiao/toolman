@@ -5,6 +5,7 @@ import nonebot
 import nonebot.helpers
 import json
 import requests
+from myConfig.configJson import configJs
 
 import aiohttp
 
@@ -25,13 +26,13 @@ async def rssMessage(session: CommandSession):
     print(text)
 
     data = {
-        "qq_group_id": str(session.ctx.get('group_id')),
+        "qq_group_id": str(session.ctx.get('group_id') or ""),
         "qq_id": str(session.ctx.get('user_id')),
         "text": text,
         "img": imageList
     }
     try:
-        async with aiohttp.request('POST', 'http://127.0.0.1:9004', data=json.dumps(data),timeout=aiohttp.client.ClientTimeout(total=timewait))as r:
+        async with aiohttp.request('POST', f'http://{configJs["serverip"]}:{configJs["rssMessageListen"]}', data=json.dumps(data),timeout=aiohttp.client.ClientTimeout(total=timewait))as r:
             js=await r.text()
             print(js)
             print('finish')
