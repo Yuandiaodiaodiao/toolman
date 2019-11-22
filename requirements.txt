@@ -9,3 +9,4 @@ tornado
 pytz
 lxml
 ujson
+json5
