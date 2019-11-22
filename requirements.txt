@@ -7,3 +7,4 @@ beautifulsoup4
 docker-compose
 tornado
 pytz
+lxml
