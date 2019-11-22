@@ -131,7 +131,7 @@ def run(op):
     if op == "rm":
         os.system("docker-compose rm -s -f")
     if op == "clear":
-        os.system("rm -rf ./coolq")`
+        os.system("rm -rf ./coolq")
 
 if __name__ == "__main__":
     try:
