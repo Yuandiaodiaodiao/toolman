@@ -15,7 +15,7 @@ botexe/bin/*
 !botexe/bin/cqc.exe
 !botexe/bin/ffmpeg.exe
 docker/coolq/
-
+config.json
 .idea/
 # Byte-compiled / optimized / DLL files
 __pycache__/
