@@ -91,5 +91,6 @@ if __name__ == "__main__":
     if op == "stop":
         os.system("docker stop coolqbot")
     if op == "rm":
-        os.system("docker stop coolqbot")
-        os.system("docker rm coolqbot")
+        os.system("docker-compose rm -s -f")
+    if op=="clear":
+        os.system("rm -rf ./coolq")
