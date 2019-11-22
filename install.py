@@ -10,8 +10,8 @@ if __name__ == "__main__":
         pipstr = sys.argv[2]
     else:
         pipstr = "pip"
-    # os.system(f"{pipstr}   install -r requirements.txt")
-    # os.system(f"""{pipstr}   install "nonebot[scheduler]" """)
+    os.system(f"{pipstr}   install -r requirements.txt")
+    os.system(f"""{pipstr}   install "nonebot[scheduler]" """)
     # install ab
     try:
         import ab
