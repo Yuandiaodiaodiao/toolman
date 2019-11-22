@@ -1,13 +1,13 @@
 {
-  "serverip": "127.0.0.1",
-  "qq_id": 1442766687,
-  "VNC_PASSWD": "xxxxxxxx",
-  "coolqVNC": 9001,
-  "nonebotListen": 9002,
-  "messageServerListen": 9003,
-  "rssMessageListen":9004,
-  "RSSHUB_URL": "http://server.oops-sdu.cn:1200",
-  "isPro": false,
+  "serverip": "127.0.0.1", //服务器ip/域名
+  "qq_id": 1442766687, //qq号
+  "VNC_PASSWD": "xxxxxxxx", //linux远程桌面的密码
+  "coolqVNC": 9001, //酷q docker的远程桌面端口 需要开外网端口
+  "nonebotListen": 9002, //nonebot的监听端口
+  "messageServerListen": 9003, //消息队列
+  "rssMessageListen":9004, //rss消息队列
+  "RSSHUB_URL": "http://server.oops-sdu.cn:1200", //rsshub服务器
+  "isPro": false, //是否使用酷q pro
   "Pro_url": "https://dlsec.cqp.me/cqp-full",
   "AIR_url": "https://dlsec.cqp.me/cqa-tuling"
 
