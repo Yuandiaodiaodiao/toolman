@@ -50,6 +50,7 @@ def config(account):
 
 
 if __name__ == "__main__":
+    PATH_THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
     qqid = 1442766687
     accountIn(qqid)
     config(qqid)

@@ -69,6 +69,7 @@ def config(account):
 
 
 if __name__ == "__main__":
+
     op = sys.argv[1]
     qqid = 2089883591
     if op == "init":
