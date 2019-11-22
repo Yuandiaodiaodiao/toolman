@@ -1,6 +1,7 @@
 # toolman
 ##### hackSDU Project  
- 
+## 各种bug
+- apt-get install python3-dev
 - /etc/timezone 中的时区要和系统时区对应  
 ## 部署  
 - 需求>=python3.6  

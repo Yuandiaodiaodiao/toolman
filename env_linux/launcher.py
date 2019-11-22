@@ -92,7 +92,7 @@ def run(op):
     if op == "init":
         pathYml = os.path.join(PATH_THIS_FLODER, "docker-compose.yml")
         with open(pathYml, 'r')as f:
-            yml = yaml.load(f.read(), Loader=yaml.FullLoader)
+            yml = yaml.load(f.read(), Loader=yaml.BaseLoader())
 
         if configJs["isPro"]:
             coolq_url = configJs["Pro_url"]
