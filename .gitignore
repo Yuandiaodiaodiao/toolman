@@ -6,7 +6,6 @@ Account.cfg
 CQA.key
 CQP.key
 env_windows/data/*
-env_windows/data/app/io.github.richardchien.coolqhttpapi
 env_windows/dev/
 install/
 env_windows/bin/*
