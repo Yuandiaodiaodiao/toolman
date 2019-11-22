@@ -8,6 +8,7 @@ CQP.key
 env_windows/app/*
 !env_windows/app/io.github.richardchien.coolqhttpapi.cpk
 env_windows/data/*
+env_windows/conf/
 env_windows/dev/
 install/
 env_windows/bin/*
@@ -16,7 +17,7 @@ env_windows/bin/*
 !env_windows/bin/cqc.exe
 !env_windows/bin/ffmpeg.exe
 env_linux/coolq/
-config.json
+myConfig/config.json
 .idea/
 # Byte-compiled / optimized / DLL files
 __pycache__/
