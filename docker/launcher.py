@@ -48,8 +48,11 @@ def accountIn(account):
     """
     with open("./coolq/conf/CQP.cfg", 'w')as f:
         f.write(cqpcfg)
-
-
+    cqAccount="""[Account]
+    session.2089883591=1
+    """
+    with open("./coolq/conf/Account.cfg", 'w')as f:
+        f.write(cqAccount)
 def config(account):
     global jsglobalconfig
     configdir = "./coolq/data/app/io.github.richardchien.coolqhttpapi/config"

@@ -34,5 +34,5 @@ if __name__ == "__main__":
     application = tornado.web.Application([
         (r"/", MainHandler),
     ])
-    application.listen(50382)
+    application.listen(9003)
     tornado.ioloop.IOLoop.current().start()
