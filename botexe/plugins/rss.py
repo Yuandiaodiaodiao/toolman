@@ -8,7 +8,7 @@ import requests
 
 import aiohttp
 
-
+timewait=1
 bot = nonebot.get_bot()
 # weather.args_parser 装饰器将函数声明为 weather 命令的参数解析器
 # 命令解析器用于将用户输入的参数解析成命令真正需要的数据
@@ -36,7 +36,7 @@ async def handle_group_message(ctx: Context_T):
         "img": imageList
     }
     try:
-        async with aiohttp.request('POST', 'http://192.168.137.205:50383', data=json.dumps(data))as r:
+        async with aiohttp.request('POST', 'http://192.168.137.205:50383', data=json.dumps(data),timeout=aiohttp.client.ClientTimeout(total=timewait))as r:
             js=await r.text()
             print(js)
             print('finish')
