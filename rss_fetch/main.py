@@ -5,12 +5,12 @@ import re
 import requests
 from urllib import request
 import datetime
-
+import socket
 MESSES_NUMBER = 1
 IP_ADDRESS = 'http://192.168.137.1:50382'
 RSSHUB_URL = "https://rsshub.app"
 OUT_RSSHUB_URL = "http://server.oops-sdu.cn:1200"
-
+socket.setdefaulttimeout(5)
 
 def check_url(url):
     with request.urlopen(url) as file:
@@ -42,7 +42,7 @@ while True:
                 if index >= MESSES_NUMBER:
                     break
                 text = ''
-                text = rss_reader['feed']['title'] + ':\n' + lis['title'] + '\n' + lis['link']
+                text = rss_reader['feed']['title'] + '👇\n' + lis['title'] + '\n' + lis['link']
                 # if 'author' in lis:
                 #     text = text + '\n' + lis['author']
                 if is_pxj:
