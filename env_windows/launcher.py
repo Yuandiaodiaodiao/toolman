@@ -4,6 +4,17 @@ import sys
 import shutil
 import json
 
+PATH_THIS_FLODER = os.path.dirname(os.path.abspath(__file__))
+
+try:
+    from myConfig.configJson import configJs
+except:
+    try:
+        toolmandir = os.path.dirname(os.path.dirname(__file__))
+        sys.path.append(toolmandir)
+        from myConfig.configJson import configJs
+    except:
+        print('configJs error')
 jsglobalconfig = {
     "use_http": False,
     "use_ws": False,
@@ -16,41 +27,44 @@ jsglobalconfig = {
 
 def accountIn(account):
     try:
-        os.makedirs("./conf")
+        os.makedirs(os.path.join(PATH_THIS_FLODER, "./conf"))
     except:
         pass
     cqpcfg = f"""
-    [App]
-        io.github.richardchien.coolqhttpapi.status=1
-    [Login]
-        Account={account}
-    """
-    with open("./conf/CQP.cfg", 'w')as f:
+      [App]
+          io.github.richardchien.coolqhttpapi.status=1
+      [Login]
+          Account={account}
+      """
+    with open(os.path.join(PATH_THIS_FLODER, "./conf/CQP.cfg"), 'w')as f:
         f.write(cqpcfg)
+    with open(os.path.join(PATH_THIS_FLODER, "./conf/CQA.cfg"), 'w')as f:
+        f.write(cqpcfg)
+
     cqAccount = f"""[Account]
-    session.{account}=1
-    """
-    with open("./conf/Account.cfg", 'w')as f:
+      session.{account}=1
+      """
+    with open(os.path.join(PATH_THIS_FLODER, "./conf/Account.cfg"), 'w')as f:
         f.write(cqAccount)
 
 
 def config(account):
     global jsglobalconfig
-    configdir = "./data/app/io.github.richardchien.coolqhttpapi/config"
+    configdir = os.path.join(PATH_THIS_FLODER, "./data/app/io.github.richardchien.coolqhttpapi/config")
     try:
         os.makedirs(configdir)
     except:
         pass
-    serverip = "127.0.0.1"
-    serverport = "9002"
+    serverip = configJs["serverip"]
+    serverport = configJs["nonebotListen"]
     jsglobalconfig["ws_reverse_api_url"] = f"ws://{serverip}:{serverport}/ws/api/"
     jsglobalconfig["ws_reverse_event_url"] = f"ws://{serverip}:{serverport}/ws/event/"
     with open(os.path.join(configdir, f"{account}.json"), 'w')as f:
         f.write(json.dumps(jsglobalconfig, indent=4))
 
-
-if __name__ == "__main__":
-    PATH_THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
-    qqid = 1442766687
+def run():
+    qqid = configJs["qq_id"]
     accountIn(qqid)
     config(qqid)
+if __name__ == "__main__":
+    run()

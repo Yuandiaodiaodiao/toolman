@@ -15,12 +15,22 @@ class MainHandler(tornado.web.RequestHandler):
         self.write('ok')
         handler.handler(data)
 
-
+try:
+    from myConfig.configJson import configJs
+except:
+    try:
+        import os
+        import sys
+        toolmandir = os.path.dirname(os.path.dirname(__file__))
+        sys.path.append(toolmandir)
+        from myConfig.configJson import configJs
+    except:
+        print('configJs error')
 def run():
     application = tornado.web.Application([
         (r"/", MainHandler),
     ])
-    application.listen(9004)
+    application.listen(configJs['rssMessageListen'])
     tornado.ioloop.IOLoop.current().start()
 
 

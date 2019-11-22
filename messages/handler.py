@@ -4,17 +4,17 @@ import os
 import base64
 import random
 from urllib import request
+from myConfig.configJson import configJs
 
 RSSHUB_URL = "https://rsshub.app"
-OUR_RSSHUB_URL = "http://server.oops-sdu.cn:1200"
-POST_URL = "http://127.0.0.1:9003"
+OUR_RSSHUB_URL = configJs["RSSHUB_URL"]
+POST_URL = f"http://{configJs['serverip']}:{configJs['messageServerListen']}"
 PATH_THIS_FLODER = os.path.dirname(os.path.abspath(__file__))
 PATH_FATHER_FLODER = os.path.dirname(PATH_THIS_FLODER)
 PATH_IMAGE_LIST = os.path.join(PATH_THIS_FLODER, 'image_list.json')
 PATH_RSS_LIST = os.path.join(PATH_FATHER_FLODER, 'rss_fetch/rss_list.json')
 # 表情包初始化
 bqb = json.load(open(PATH_IMAGE_LIST, encoding='utf-8'))
-
 
 def check_url(url):
     try:
@@ -118,21 +118,23 @@ def handler_command(data):
 # add_rss https://rsshub.app/sdu/cs/0 -at
 # del_rss https://rsshub.app/sdu/cs/0
 """
+    json_list = json.load(open(PATH_RSS_LIST))
     text = data['text'].split()
     if data['qq_group_id'] in json_list.keys():
         if len(text) > 2 and text[1] == 'add_rss':
             add_rss_url(data, text[2], '-at' in text)
         elif len(text) > 2 and text[1] == 'del_rss':
             del_rss_url(data, text[2], '-at' in text)
+        else:
+            send_message(data['qq_group_id'], [data['qq_id']], "命令错误，私发我 “#” 查看帮助", "")
+            send_message("", [data['qq_id']], message_help, "", ensure_private=True)
     if data['qq_group_id'] == "":
         if len(text) == 1:
             send_message("", [data['qq_id']], message_help, "", ensure_private=True)
         elif len(text) > 1 and text[1] == 'status':
             send_message("", [data['qq_id']], '🐎订阅列表：\n'
                          + json.dumps(json.load(open(PATH_RSS_LIST)), indent=2, ensure_ascii=False), "", ensure_private=True)
-    else:
-        send_message(data['qq_group_id'], [data['qq_id']], "命令错误，私发我 “#” 查看帮助", "")
-        send_message("", [data['qq_id']], message_help, "", ensure_private=True)
+
     # elif len(text) > 2 and text[1] == 'add_bqb':
     #     add_bqb(data, text[2], data['img'])
     # elif len(text) > 2 and text[1] == 'del_bqb':

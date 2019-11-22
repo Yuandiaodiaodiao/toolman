@@ -1,3 +1,14 @@
 {
-  "serverip": "127.0.0.1"
+  "serverip": "127.0.0.1",
+  "qq_id": 1442766687,
+  "VNC_PASSWD": "xxxxxxxx",
+  "coolqVNC": 9001,
+  "nonebotListen": 9002,
+  "messageServerListen": 9003,
+  "rssMessageListen":9004,
+  "RSSHUB_URL": "http://server.oops-sdu.cn:1200",
+  "isPro": false,
+  "Pro_url": "https://dlsec.cqp.me/cqp-full",
+  "AIR_url": "https://dlsec.cqp.me/cqa-tuling"
+
 }

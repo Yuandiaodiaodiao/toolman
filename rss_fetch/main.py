@@ -7,11 +7,21 @@ from urllib import request
 import datetime
 import socket
 import os
-
+try:
+    from myConfig.configJson import configJs
+except:
+    try:
+        import os
+        import sys
+        toolmandir = os.path.dirname(os.path.dirname(__file__))
+        sys.path.append(toolmandir)
+        from myConfig.configJson import configJs
+    except:
+        print('configJs error')
 MESSES_NUMBER = 1
-IP_ADDRESS = 'http://127.0.0.1:9003'
+IP_ADDRESS = f'http://{configJs["serverip"]}:{configJs["messageServerListen"]}'
 RSSHUB_URL = "https://rsshub.app"
-OUT_RSSHUB_URL = "http://server.oops-sdu.cn:1200"
+OUT_RSSHUB_URL = configJs["RSSHUB_URL"]
 socket.setdefaulttimeout(5)
 
 

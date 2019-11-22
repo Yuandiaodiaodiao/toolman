@@ -3,6 +3,9 @@ import os
 import sys
 import shutil
 import json
+import yaml
+
+PATH_THIS_FLODER = os.path.dirname(os.path.abspath(__file__))
 
 jsglobalconfig = {
     "use_http": False,
@@ -23,12 +26,12 @@ jsglobalconfig = {
 
 def cp():
     try:
-        os.mkdir("./coolq/bin")
+        os.mkdir(os.path.join(PATH_THIS_FLODER, "./coolq/bin"))
     except:
         pass
-    copyList = ["cqc.exe", "ffmpeg.exe","libeay32.dll","zlib1.dll"]
-    fromdir = "../env_windows/bin"
-    todir = "./coolq/bin"
+    copyList = ["cqc.exe", "ffmpeg.exe", "libeay32.dll", "zlib1.dll"]
+    fromdir = os.path.join(PATH_THIS_FLODER, "../env_windows/bin")
+    todir = os.path.join(PATH_THIS_FLODER, "./coolq/bin")
     for name in copyList:
         shutil.copyfile(os.path.join(fromdir, name), os.path.join(todir, name))
     # shutil.copyfile("../env_windows/bin/libeay32.dll", "./coolq/bin")
@@ -37,7 +40,7 @@ def cp():
 
 def accountIn(account):
     try:
-        os.makedirs("./coolq/conf")
+        os.makedirs(os.path.join(PATH_THIS_FLODER, "./coolq/conf"))
     except:
         pass
     cqpcfg = f"""
@@ -46,16 +49,21 @@ def accountIn(account):
     [Login]
         Account={account}
     """
-    with open("./coolq/conf/CQP.cfg", 'w')as f:
+    with open(os.path.join(PATH_THIS_FLODER, "./coolq/conf/CQP.cfg"), 'w')as f:
         f.write(cqpcfg)
-    cqAccount="""[Account]
-    session.2089883591=1
-    """
-    with open("./coolq/conf/Account.cfg", 'w')as f:
+    with open(os.path.join(PATH_THIS_FLODER, "./coolq/conf/CQA.cfg"), 'w')as f:
+        f.write(cqpcfg)
+
+    cqAccount = f"""[Account]
+      session.{account}=1
+      """
+    with open(os.path.join(PATH_THIS_FLODER, "./coolq/conf/Account.cfg"), 'w')as f:
         f.write(cqAccount)
+
+
 def config(account):
     global jsglobalconfig
-    configdir = "./coolq/app/io.github.richardchien.coolqhttpapi/config"
+    configdir = os.path.join(PATH_THIS_FLODER, "./coolq/app/io.github.richardchien.coolqhttpapi/config")
     try:
         os.makedirs(configdir)
     except:
@@ -68,11 +76,38 @@ def config(account):
         f.write(json.dumps(jsglobalconfig, indent=4))
 
 
-if __name__ == "__main__":
+try:
+    from myConfig.configJson import configJs
+except:
+    try:
+        toolmandir = os.path.dirname(os.path.dirname(__file__))
+        sys.path.append(toolmandir)
+        from myConfig.configJson import configJs
+    except:
+        print('configJs error')
 
-    op = sys.argv[1]
-    qqid = 2089883591
+
+def run(op):
+    qqid = configJs["qq_id"]
     if op == "init":
+        pathYml = os.path.join(PATH_THIS_FLODER, "docker-compose.yml")
+        with open(pathYml, 'r')as f:
+            yml = yaml.load(f.read(), Loader=yaml.FullLoader)
+
+        if configJs["isPro"]:
+            coolq_url = configJs["Pro_url"]
+        else:
+            coolq_url = configJs["AIR_url"]
+
+        yml['services']['coolqbot']['environment'] = [f'VNC_PASSWD={configJs["VNC_PASSWD"]}', f'COOLQ_URL={coolq_url}',
+                                                      'CQHTTP_USE_WS_REVERSE=yes',
+                                                      f'CQHTTP_WS_REVERSE_API_URL=ws://172.17.0.1:{configJs["nonebotListen"]}/ws/api/',
+                                                      f'CQHTTP_WS_REVERSE_EVENT_URL=ws://172.17.0.1:{configJs["nonebotListen"]}/ws/event/',
+                                                      'CQHTTP_SHOW_LOG_CONSOLE=no', 'CQHTTP_USE_HTTP=no',
+                                                      'CQHTTP_USE_WS=no']
+        yml['services']['coolqbot']['ports'] = [f'{configJs["coolqVNC"]}:9000']
+        with open(pathYml, 'w')as f:
+            yaml.dump(yml, f)
         try:
             os.mkdir("./coolq")
         except:
@@ -93,5 +128,13 @@ if __name__ == "__main__":
         os.system("docker stop coolqbot")
     if op == "rm":
         os.system("docker-compose rm -s -f")
-    if op=="clear":
+    if op == "clear":
         os.system("rm -rf ./coolq")
+
+
+if __name__ == "__main__":
+    try:
+        op = sys.argv[1]
+    except:
+        op = "init"
+    run(op)
