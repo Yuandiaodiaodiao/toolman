@@ -1,0 +1,20 @@
+version: "0.2"
+services:
+
+  coolqbot:
+    image: richardchien/cqhttp:latest
+    container_name: coolqbot
+    restart: always
+    ports:
+      - "9000:9000"
+    environment:
+      - VNC_PASSWD=Wangzixi
+      - COOLQ_URL=https://dlsec.cqp.me/cqp-full
+      - CQHTTP_USE_WS_REVERSE=yes
+      - CQHTTP_WS_REVERSE_API_URL=ws://172.17.0.1:9002:9002/ws/api/
+      - CQHTTP_WS_REVERSE_EVENT_URL=ws://172.17.0.1:9002:9002/ws/event/
+      - CQHTTP_SHOW_LOG_CONSOLE=no
+      - CQHTTP_USE_HTTP=no
+      - CQHTTP_USE_WS=no
+    volumes:
+      - ./coolq:/home/user/coolq

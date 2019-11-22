@@ -2,5 +2,10 @@ requests
 feedparser
 nonebot
 aiohttp
-"nonebot[scheduler]"
+nonebot[scheduler]
 beautifulsoup4
+docker-compose
+tornado
+pytz
+lxml
+ujson

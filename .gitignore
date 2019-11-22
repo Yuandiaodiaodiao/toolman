@@ -1,14 +1,22 @@
 #bot
 image/
-botexe/data/tmp
+env_windows/data/tmp
 CQP.cfg
 Account.cfg
 CQA.key
 CQP.key
-botexe/data/*
-!botexe/data/app
+env_windows/app/*
+!env_windows/app/io.github.richardchien.coolqhttpapi.cpk
+env_windows/data/*
+env_windows/dev/
 install/
-
+env_windows/bin/*
+!env_windows/bin/zlib1.dll
+!env_windows/bin/libeay32.dll
+!env_windows/bin/cqc.exe
+!env_windows/bin/ffmpeg.exe
+env_linux/coolq/
+config.json
 .idea/
 # Byte-compiled / optimized / DLL files
 __pycache__/
