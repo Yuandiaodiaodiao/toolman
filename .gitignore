@@ -5,6 +5,8 @@ CQP.cfg
 Account.cfg
 CQA.key
 CQP.key
+env_windows/app/*
+!env_windows/app/io.github.richardchien.coolqhttpapi.cpk
 env_windows/data/*
 env_windows/dev/
 install/
