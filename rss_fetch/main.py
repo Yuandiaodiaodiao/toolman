@@ -7,11 +7,13 @@ from urllib import request
 import datetime
 import socket
 import os
+
 MESSES_NUMBER = 1
 IP_ADDRESS = 'http://127.0.0.1:9003'
 RSSHUB_URL = "https://rsshub.app"
 OUT_RSSHUB_URL = "http://server.oops-sdu.cn:1200"
 socket.setdefaulttimeout(5)
+
 
 def check_url(url):
     with request.urlopen(url) as file:
@@ -20,11 +22,12 @@ def check_url(url):
         ans = file.reason
     return ans
 
+
 def run():
     last_mess = {}
     while True:
         # print('新的一轮', datetime.datetime.now())
-        with open(os.path.join(os.path.dirname(os.path.abspath(__file__)),'rss_list.json'), encoding='utf-8') as fin:
+        with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'rss_list.json'), encoding='utf-8') as fin:
             content = fin.read()
         json_reader = json.loads(content)
         for key_i in json_reader.keys():
@@ -72,10 +75,9 @@ def run():
         time.sleep(5)
     # print(lis['content'][0].keys())
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     run()
-
-
 
 # qq_group_id, qq_id_list, text, img
 

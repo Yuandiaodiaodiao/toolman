@@ -1,14 +1,15 @@
 import os
 import sys
-if __name__=="__main__":
-    if len(sys.argv)>=2:
-        pythonstr=sys.argv[1]
+
+if __name__ == "__main__":
+    if len(sys.argv) >= 2:
+        pythonstr = sys.argv[1]
     else:
-        pythonstr="python"
-    if len(sys.argv)>=3:
-        pipstr=sys.argv[2]
+        pythonstr = "python"
+    if len(sys.argv) >= 3:
+        pipstr = sys.argv[2]
     else:
-        pipstr="pip"
+        pipstr = "pip"
     os.system(f"{pipstr}   install -r requirements.txt")
     os.system(f'{pipstr}   install "nonebot[scheduler]"')
 
