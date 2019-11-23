@@ -16,6 +16,7 @@ PATH_RSS_LIST = os.path.join(PATH_FATHER_FLODER, 'rss_fetch/rss_list.json')
 # 表情包初始化
 bqb = json.load(open(PATH_IMAGE_LIST, encoding='utf-8'))
 
+
 def check_url(url):
     try:
         res = requests.get(url.replace(RSSHUB_URL, OUR_RSSHUB_URL))
@@ -51,14 +52,14 @@ def add_rss_url(data, rss_url, at):
     json_list = json.load(open(PATH_RSS_LIST))
     json_item = json_list[data['qq_group_id']]
     if rss_url in json_item.keys() and not at:  # 他想添加这个 url，但是已存在
-        send_message(data['qq_group_id'], [data['qq_id']], f"👴已经订阅这个 url 了，不要重复订阅！", "")
+        send_message("", [data['qq_id']], f"👴已经订阅这个 url 了，不要重复订阅！", "", ensure_private=True)
     if rss_url not in json_item.keys():  # 不存在 添加！
         json_item[rss_url] = []
-        send_message(data['qq_group_id'], [data['qq_id']], f"为此群添加了 {rss_url} 订阅源。", "")
+        send_message("", [data['qq_id']], f"为此群添加了 {rss_url} 订阅源。", "", ensure_private=True)
     if at:
         json_item[rss_url].append(data['qq_id'])
         json_item[rss_url] = list(set(json_item[rss_url]))
-        send_message(data['qq_group_id'], [data['qq_id']], f"当 {rss_url} 更新时会提醒你。", "")
+        send_message("", [data['qq_id']], f"当 {rss_url} 更新时会提醒你。", "", ensure_private=True)
     json.dump(json_list, open(PATH_RSS_LIST, "w"), ensure_ascii=False)
 
 
@@ -66,13 +67,13 @@ def del_rss_url(data, rss_url, at):
     json_list = json.load(open(PATH_RSS_LIST))
     json_item = json_list[data['qq_group_id']]
     if rss_url not in json_item.keys():  # 删除这个 url，但是不存在
-        send_message(data['qq_group_id'], [data['qq_id']], f"此 url 未被订阅", "")
+        send_message("", [data['qq_id']], f"此 url 未被订阅", "", ensure_private=True)
     if rss_url in json_item.keys() and not at:  # 删除此订阅源
-        send_message(data['qq_group_id'], json_item[rss_url], f"{rss_url} 订阅源已被删除", "")
+        send_message("", json_item[rss_url], f"{rss_url} 订阅源已被删除", "", ensure_private=True)
         json_item.pop(rss_url)
     if at:
         json_item[rss_url].remove(data['qq_id'])
-        send_message(data['qq_group_id'], [data['qq_id']], f"已将你从 {rss_url} 的提醒列表中删除。", "")
+        send_message("", [data['qq_id']], f"已将你从 {rss_url} 的提醒列表中删除。", "", ensure_private=True)
     json.dump(json_list, open(PATH_RSS_LIST, "w"), ensure_ascii=False)
 
 
@@ -126,7 +127,7 @@ def handler_command(data):
         elif len(text) > 2 and text[1] == 'del_rss':
             del_rss_url(data, text[2], '-at' in text)
         else:
-            send_message(data['qq_group_id'], [data['qq_id']], "命令错误，私发我 “#” 查看帮助", "")
+            send_message("", [data['qq_id']], "命令错误", "", ensure_private=True)
             send_message("", [data['qq_id']], message_help, "", ensure_private=True)
     if data['qq_group_id'] == "":
         if len(text) == 1:
