@@ -69,7 +69,9 @@ def del_rss_url(data, rss_url, at):
     if rss_url not in json_item.keys():  # 删除这个 url，但是不存在
         send_message("", [data['qq_id']], f"此 url 未被订阅", "", ensure_private=True)
     if rss_url in json_item.keys() and not at:  # 删除此订阅源
-        send_message("", json_item[rss_url], f"{rss_url} 订阅源已被删除", "", ensure_private=True)
+        if len(json_item[rss_url])>1:
+            send_message(data['qq_group_id'], json_item[rss_url], f"你订阅的 {rss_url} 订阅源已被删除", "")
+        send_message("", [data['qq_id']], f"{rss_url} 订阅源已被删除", "", ensure_private=True)
         json_item.pop(rss_url)
     if at:
         json_item[rss_url].remove(data['qq_id'])
