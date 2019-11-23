@@ -79,7 +79,8 @@ def run():
                     send_package['qq_group_id'] = key_i
                     send_package['qq_id_list'] = json_reader[key_i][key_j]
                     send_package['text'] = texts
-                    send_package['img'] = picture
+                    # send_package['img'] = picture
+                    send_package['img'] = ''
                     res = requests.post(IP_ADDRESS, data=json.dumps(send_package))
                     print(send_package)
         time.sleep(5)
