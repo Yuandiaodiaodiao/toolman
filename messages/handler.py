@@ -55,7 +55,7 @@ def add_rss_url(data, rss_url, at):
         send_message("", [data['qq_id']], f"👴已经订阅这个 url 了，不要重复订阅！", "", ensure_private=True)
     if rss_url not in json_item.keys():  # 不存在 添加！
         json_item[rss_url] = []
-        send_message("", [data['qq_id']], f"为此群添加了 {rss_url} 订阅源。", "", ensure_private=True)
+        send_message("", [data['qq_id']], f"为群({data['qq_group_id']})添加了 {rss_url} 订阅源。", "", ensure_private=True)
     if at:
         json_item[rss_url].append(data['qq_id'])
         json_item[rss_url] = list(set(json_item[rss_url]))
