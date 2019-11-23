@@ -5,6 +5,8 @@ from dfaMaster import check_sensitive
 bot = nonebot.get_bot()
 @bot.on_message('group')
 async def handle_group_message(ctx: Context_T):
+    return
+    #功能暂时下线
     text=""
     for i in ctx.get('message'):
         if i.type == 'text':

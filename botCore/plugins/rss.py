@@ -29,7 +29,8 @@ async def rssMessage(session: CommandSession):
         "qq_group_id": str(session.ctx.get('group_id') or ""),
         "qq_id": str(session.ctx.get('user_id')),
         "text": text,
-        "img": imageList
+        "img": imageList,
+        "msg_id": str(session.ctx.get('message_id') or "")
     }
     try:
         async with aiohttp.request('POST', f'http://{configJs["serverip"]}:{configJs["rssMessageListen"]}', data=json.dumps(data),timeout=aiohttp.client.ClientTimeout(total=timewait))as r:

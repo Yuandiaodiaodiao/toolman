@@ -31,6 +31,8 @@ async def sendMessageCached():
             return
         for i in js:
             print(i)
+            if i.get('del_msg'):
+                await bot.delete_msg(message_id= i.get('message_id'))
             msg = Message('')
             # int(i.get('qq_group_id'))
             if not i.get('ensure_private'):
