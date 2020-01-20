@@ -32,12 +32,15 @@ def check_url(url):
         ans = file.reason
     return ans
 
-
+RSS_FILE_PATH=os.path.join(os.path.dirname(os.path.abspath(__file__)), 'rss_list.json')
+if not os.path.exists(RSS_FILE_PATH):
+    with open(RSS_FILE_PATH,'w')as f:
+        f.write('{}')
 def run():
     last_mess = {}
     while True:
         # print('新的一轮', datetime.datetime.now())
-        with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'rss_list.json'), encoding='utf-8') as fin:
+        with open(RSS_FILE_PATH, encoding='utf-8') as fin:
             content = fin.read()
         json_reader = json.loads(content)
         for key_i in json_reader.keys():

@@ -18,10 +18,17 @@ except:
 jsglobalconfig = {
     "use_http": False,
     "use_ws": False,
+    "ws_reverse_url": "",
     "ws_reverse_api_url": "ws://127.0.0.1:8080/ws/api/",
     "ws_reverse_event_url": "ws://127.0.0.1:8080/ws/event/",
+    "ws_reverse_reconnect_interval": 3000,
+    "ws_reverse_reconnect_on_code_1000": True,
     "use_ws_reverse": True,
     "show_log_console": False,
+    "enable_rate_limited_actions": False,
+    "rate_limit_interval": 100,
+    "thread_pool_size": 0,
+    "server_thread_pool_size": 0,
 }
 
 
@@ -62,9 +69,12 @@ def config(account):
     with open(os.path.join(configdir, f"{account}.json"), 'w')as f:
         f.write(json.dumps(jsglobalconfig, indent=4))
 
+
 def run():
     qqid = configJs["qq_id"]
     accountIn(qqid)
     config(qqid)
+
+
 if __name__ == "__main__":
     run()

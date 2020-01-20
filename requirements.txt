@@ -11,3 +11,4 @@ lxml
 ujson
 json5
 pyyaml
+screepsapi
