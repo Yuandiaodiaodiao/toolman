@@ -21,5 +21,19 @@
  通过访问localhost:coolqVNC连入远程桌面
  输入密码VNC_PASSWD进入
 ### 4部署nonebot和RSS
-- 运行 python run.py 并守护进程
+- 运行 python run.py 并守护进程  
+
+## TODO
+- 百度云离线下载局域网秒传
+- 百度云文库下载器
+- 表情包unique搜索
+- 和他对线
+- waifu2x
+- 二维码生成
+- 图片库 tag标注 图片相似度合并
+- 天气预警
+- 色图库
+- 赛🐎
+- 互动视频图文
+- 
 
