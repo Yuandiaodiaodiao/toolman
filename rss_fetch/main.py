@@ -80,7 +80,7 @@ def run():
                             break
                     texts.append(text)
 
-                if len(texts) != 0 and gotoflag == 0:
+                if len(texts) != 0 and gotoflag == 1:
                     last_mess[key_i + key_j] = texts[0]
                     send_package['qq_group_id'] = key_i
                     send_package['qq_id_list'] = json_reader[key_i][key_j]
